@@ -7,14 +7,16 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private MenuHandler menuHandler;
     [SerializeField] private SettingsButtonHandler settingsHandler;
     [SerializeField] private PauseButtonHandler pauseHandler;
-    [SerializeField] private List<GameObject> infoDisplays;
+    [SerializeField] private List<GameObject> runtimeDisplays;
+    [SerializeField] private List<GameObject> pauseDisplays;
     [SerializeField] private GameObject block;
     private bool gamePaused = true;
     private bool menuOpened = false;
 
     public void OnEnable()
     {
-        foreach (GameObject obj in infoDisplays) obj.SetActive(false);
+        foreach (GameObject obj in runtimeDisplays) obj.SetActive(false);
+        foreach (GameObject obj in pauseDisplays) obj.SetActive(true);
         block.GetComponent<Rigidbody2D>().isKinematic = true;
         settingsHandler.EnableButton();
         pauseHandler.Pause();
@@ -50,7 +52,8 @@ public class ButtonController : MonoBehaviour
                 menuHandler.Close();
             }
             gamePaused = false;
-            foreach (GameObject obj in infoDisplays) obj.SetActive(true);
+            foreach (GameObject obj in runtimeDisplays) obj.SetActive(true);
+            foreach (GameObject obj in pauseDisplays) obj.SetActive(false);
             block.GetComponent<Rigidbody2D>().isKinematic = false;
             settingsHandler.DisableButton();
             pauseHandler.Play();
@@ -60,7 +63,8 @@ public class ButtonController : MonoBehaviour
         {
             Rigidbody2D rb = block.GetComponent<Rigidbody2D>();
             gamePaused = true;
-            foreach (GameObject obj in infoDisplays) obj.SetActive(false);
+            foreach (GameObject obj in runtimeDisplays) obj.SetActive(false);
+            foreach (GameObject obj in pauseDisplays) obj.SetActive(true);
             block.transform.position = Vector3.zero;
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
