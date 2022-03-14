@@ -3,13 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImpulseUpSliderController : MonoBehaviour
+public class ImpulseSliderController : MonoBehaviour
 {
-    [SerializeField] private GameObject block;
-    [SerializeField] private GameObject slider;
 
-    public void ChangeImpulse()
+    [SerializeField] private Slider slider;
+    [SerializeField] private GameObject text;
+    [SerializeField] private GameObject block;
+    private Vector3 impulse;
+
+    private void OnEnable()
     {
-        block.GetComponent<Rigidbody2D>().AddForce(slider.GetComponent<Slider>().value * (-block.transform.forward), ForceMode2D.Impulse);
+        UpdateImpulse();
     }
+
+    public Vector3 GetImpulse()
+    {
+        return impulse;
+    }
+
+    public void UpdateImpulse()
+    {
+        text.GetComponent<Text>().text = string.Format("Õ¿◊¿À‹Õ¿ﬂ — Œ–Œ—“‹: {0:f0} Ï/Ò", slider.value);
+        impulse = block.transform.right * slider.value;
+    }
+
 }

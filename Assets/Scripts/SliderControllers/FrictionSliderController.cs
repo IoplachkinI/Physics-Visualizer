@@ -7,17 +7,17 @@ public class FrictionSliderController : MonoBehaviour
 {
     [SerializeField] private GameObject slider;
     [SerializeField] private GameObject text;
-    [SerializeField] private PhysicsMaterial2D mat;
+    [SerializeField] private GameObject block;
 
     public void OnEnable()
     {
-        ChangeFriction();
+        UpdateFriction();
     }
 
-    public void ChangeFriction()
+    public void UpdateFriction()
     {
-        float fric = slider.GetComponent<Slider>().value / 100f;
-        mat.friction = fric;
+        float fric = slider.GetComponent<Slider>().value;
+        block.GetComponent<Collider2D>().sharedMaterial.friction = fric;
         text.GetComponent<Text>().text = string.Format(" Œ›‘‘. “–≈Õ»ﬂ: {0:f2}", fric);
     }
 

@@ -12,16 +12,16 @@ public class AngleSliderController : MonoBehaviour
 
     public void OnEnable()
     {
-        ChangeAngle();
+        UpdateAngle();
     }
 
-    public void ChangeAngle()
+    public void UpdateAngle()
     {
-        float angle = -slider.GetComponent<Slider>().value / 100f;
+        float angle = -slider.GetComponent<Slider>().value;
         Quaternion target = Quaternion.Euler(0, 0, angle);
         plane.transform.rotation = target;
         block.transform.rotation = target;
-        text.GetComponent<Text>().text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿: {0:f1}", Mathf.Abs(angle));
+        text.GetComponent<Text>().text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿: {0:f0}", Mathf.Abs(angle));
     }
 
 }

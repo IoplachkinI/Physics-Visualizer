@@ -23,12 +23,12 @@ public class SettingsButtonHandler : MonoBehaviour
 
     public void DisableButton()
     {
-        gameObject.GetComponent<Button>().enabled = false;
+        gameObject.GetComponent<Button>().interactable = false;
     }
 
     public void EnableButton()
     {
-        gameObject.GetComponent<Button>().enabled = true;
+        gameObject.GetComponent<Button>().interactable = true;
     }
 
 

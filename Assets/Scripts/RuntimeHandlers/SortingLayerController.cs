@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class SortingLayerController : MonoBehaviour
 {
-    [SerializeField] private List<MeshRenderer> meshes;
+    [SerializeField] private string sortingLayerName;
+    [SerializeField] private int sortingOrder;
 
     private void OnEnable()
     {
-        foreach(MeshRenderer mesh in meshes)
-        {
-            mesh.sortingLayerID = SortingLayer.NameToID("Displays");
-        }
+        GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(sortingLayerName);
+        GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
     }
 }

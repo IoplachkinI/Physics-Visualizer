@@ -11,10 +11,10 @@ public class MassSliderController : MonoBehaviour
 
     private void OnEnable()
     {
-        ChangeBlockMass();
+        UpdateMass();
     }
 
-    public void ChangeBlockMass()
+    public void UpdateMass()
     {
         float val = slider.GetComponent<Slider>().value;
         float mass = 1;
