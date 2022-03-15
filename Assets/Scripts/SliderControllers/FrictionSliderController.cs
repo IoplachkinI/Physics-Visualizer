@@ -18,6 +18,7 @@ public class FrictionSliderController : MonoBehaviour
     {
         float fric = slider.GetComponent<Slider>().value;
         block.GetComponent<Collider2D>().sharedMaterial.friction = fric;
+        block.GetComponent<Rigidbody2D>().sharedMaterial.friction = fric;
         text.GetComponent<Text>().text = string.Format(" Œ›‘‘. “–≈Õ»ﬂ: {0:f2}", fric);
     }
 
