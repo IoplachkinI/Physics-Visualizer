@@ -49,7 +49,7 @@ public class ArrowHandler : MonoBehaviour
         else head.GetComponent<SpriteRenderer>().flipY = false;
 
         text.transform.position = (head.transform.position - transform.position)
-            * 0.75f + target.transform.position;
+            * 0.5f + target.transform.position;
 
     }
 
