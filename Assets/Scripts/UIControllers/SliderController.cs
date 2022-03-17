@@ -8,7 +8,7 @@ public class SliderController : MonoBehaviour
     private MassSliderController mass;
     private FrictionSliderController friction;
     private ImpulseSliderController impulse;
-    [SerializeField] private VectorController forces;
+    [SerializeField] private ForcesController forces;
 
     private void OnEnable()
     {
@@ -22,19 +22,19 @@ public class SliderController : MonoBehaviour
     {
         angle.UpdateAngle();
         impulse.UpdateImpulse();
-        forces.UpdateForces();
+        forces.UpdateVectors();
     }
 
     public void UpdateMass()
     {
         mass.UpdateMass();
-        forces.UpdateForces();
+        forces.UpdateVectors();
     }
 
     public void UpdateFriction()
     {
         friction.UpdateFriction();
-        forces.UpdateForces();
+        forces.UpdateVectors();
     }
 
     public void UpdateImpulse()

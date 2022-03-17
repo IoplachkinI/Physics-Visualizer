@@ -16,6 +16,8 @@ public class ArrowHandler : MonoBehaviour
     private float EPSILON = 0.00001f;
     public bool followTargetRotation = true;
 
+    [HideInInspector] public float arrowLen = 1f;
+
     public void OnEnable()
     {
         UpdateArrows();
@@ -24,6 +26,8 @@ public class ArrowHandler : MonoBehaviour
     public void UpdateArrows()
     {
         Vector3 size = body.GetComponent<SpriteRenderer>().size;
+
+        size.y = arrowLen;
 
         if (Mathf.Abs(size.y) < threshold + EPSILON)
         {

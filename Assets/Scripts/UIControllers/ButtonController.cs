@@ -11,6 +11,7 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private SettingsButtonHandler settingsHandler;
     [SerializeField] private PauseButtonHandler pauseHandler;
     [SerializeField] private StopButtonHandler stopHandler;
+    [SerializeField] private TimeDisplayHandler timeHandler;
     [SerializeField] private List<GameObject> runtimeDisplays;
     [SerializeField] private List<GameObject> stopppedDisplays;
     [SerializeField] private GameObject block;
@@ -59,6 +60,8 @@ public class ButtonController : MonoBehaviour
         pauseHandler.Pause();
         settingsHandler.EnableButton();
         stopHandler.DisableButton();
+        timeHandler.updateTime = false;
+        timeHandler.ResetTime();
         Time.timeScale = 1f;
     }
 
@@ -71,6 +74,7 @@ public class ButtonController : MonoBehaviour
                 {
                     state = State.Paused;
                     pauseHandler.Pause();
+                    timeHandler.updateTime = false;
                     Time.timeScale = 0f;
                     break;
                 }
@@ -78,6 +82,7 @@ public class ButtonController : MonoBehaviour
                 {
                     state = State.Running;
                     pauseHandler.Play();
+                    timeHandler.updateTime = true;
                     Time.timeScale = 1f;
                     break;
                 }
@@ -90,7 +95,8 @@ public class ButtonController : MonoBehaviour
                         menuHandler.Close();
                     }
                     state = State.Running;
-                    foreach(GameObject obj in runtimeDisplays) obj.SetActive(true);
+                    timeHandler.updateTime = true;
+                    foreach (GameObject obj in runtimeDisplays) obj.SetActive(true);
                     foreach (GameObject obj in stopppedDisplays) obj.SetActive(false);
                     rb.isKinematic = false;
                     rb.AddForce(impulseController.GetImpulse() * rb.mass, ForceMode2D.Impulse);

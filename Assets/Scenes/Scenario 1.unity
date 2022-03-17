@@ -1174,6 +1174,7 @@ MonoBehaviour:
   offset: -90
   threshold: 0
   followTargetRotation: 1
+  arrowLen: 1
 --- !u!1 &298791623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,6 +1781,85 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411097471}
+  m_CullTransparentMesh: 1
+--- !u!1 &438520645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438520646}
+  - component: {fileID: 438520648}
+  - component: {fileID: 438520647}
+  m_Layer: 5
+  m_Name: Time (Text)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &438520646
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438520645}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 797539541}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 50}
+  m_SizeDelta: {x: 474.13135, y: 111.2323}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &438520647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438520645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ce3cf462e41dd3d46b428d3f38536475, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: t=0 c
+--- !u!222 &438520648
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438520645}
   m_CullTransparentMesh: 1
 --- !u!1 &494381154
 GameObject:
@@ -2460,6 +2540,7 @@ MonoBehaviour:
   settingsHandler: {fileID: 1188928905}
   pauseHandler: {fileID: 2051350498}
   stopHandler: {fileID: 1436220801}
+  timeHandler: {fileID: 1195811161}
   runtimeDisplays:
   - {fileID: 117138762}
   stopppedDisplays:
@@ -2538,7 +2619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1559871960}
   text: {fileID: 1171859073}
-  block: {fileID: 1172071818}
+  forces: {fileID: 1195811160}
 --- !u!114 &652805659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2566,7 +2647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317be7b2b2bf0c84ebaf53b4282feaff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forces: {fileID: 1195811161}
+  forces: {fileID: 1195811160}
 --- !u!1 &655569047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,7 +3125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742775383}
   m_Layer: 0
-  m_Name: Vectors (Displays)
+  m_Name: Arrows (Displays)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3272,6 +3353,7 @@ RectTransform:
   - {fileID: 559502046}
   - {fileID: 1171859076}
   - {fileID: 1717170855}
+  - {fileID: 438520646}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4007,6 +4089,7 @@ MonoBehaviour:
   offset: 90
   threshold: 1
   followTargetRotation: 1
+  arrowLen: 1
 --- !u!1 &1004658696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4139,6 +4222,7 @@ MonoBehaviour:
   offset: 0
   threshold: 1
   followTargetRotation: 1
+  arrowLen: 1
 --- !u!1 &1021689576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4699,6 +4783,7 @@ GameObject:
   - component: {fileID: 1172071821}
   - component: {fileID: 1172071822}
   - component: {fileID: 1172071823}
+  - component: {fileID: 1172071824}
   m_Layer: 0
   m_Name: Block
   m_TagString: Block
@@ -4832,6 +4917,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5539fbf4189c844b47246f194bfb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!247 &1172071824
+ConstantForce2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172071818}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0}
+  m_RelativeForce: {x: 0, y: 0}
+  m_Torque: 0
 --- !u!1 &1188928900
 GameObject:
   m_ObjectHideFlags: 0
@@ -4989,6 +5085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195811159}
+  - component: {fileID: 1195811160}
   - component: {fileID: 1195811161}
   m_Layer: 0
   m_Name: RuntimeController
@@ -5011,6 +5108,26 @@ Transform:
   m_Father: {fileID: 548954719}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1195811160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195811158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f93b001c50b6a49bfe26805ecaa4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  block: {fileID: 1172071818}
+  mgArrow: {fileID: 1377717862}
+  nArrow: {fileID: 1012624102}
+  frArrow: {fileID: 967933317}
+  velocity: {fileID: 294493196}
+  minLen: 1
+  k: 0.12
+  friction: 0
 --- !u!114 &1195811161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5020,16 +5137,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195811158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c28366bb5074745b71e01f13584edf, type: 3}
+  m_Script: {fileID: 11500000, guid: d75ed9411d6d78045aef09b9cec0e6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1172071818}
-  gravity: {fileID: 398708282}
-  reaction: {fileID: 1123665505}
-  friction: {fileID: 243259080}
-  velocity: {fileID: 1727274488}
-  minLen: 1
-  k: 0.015
+  text: {fileID: 438520647}
+  updateTime: 0
 --- !u!1 &1225995797
 GameObject:
   m_ObjectHideFlags: 0
@@ -5400,6 +5512,7 @@ MonoBehaviour:
   offset: 180
   threshold: 1
   followTargetRotation: 0
+  arrowLen: 1
 --- !u!1 &1399684623
 GameObject:
   m_ObjectHideFlags: 0
