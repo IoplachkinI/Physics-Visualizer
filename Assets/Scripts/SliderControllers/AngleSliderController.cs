@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class AngleSliderController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D plane;
-    [SerializeField] private Rigidbody2D block;
+    [SerializeField] private GameObject plane;
+    [SerializeField] private GameObject block;
     [SerializeField] private GameObject slider;
     [SerializeField] private GameObject text;
 
