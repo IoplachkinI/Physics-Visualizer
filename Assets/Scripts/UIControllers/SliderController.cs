@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class SliderController : MonoBehaviour
     private FrictionSliderController friction;
     private ImpulseSliderController impulse;
     [SerializeField] private ForcesController forces;
+    [SerializeField] private List<Slider> sliders;
 
     private void OnEnable()
     {
@@ -16,6 +18,7 @@ public class SliderController : MonoBehaviour
         mass = GetComponent<MassSliderController>();
         friction = GetComponent<FrictionSliderController>();    
         impulse = GetComponent<ImpulseSliderController>();
+        foreach (Slider slider in sliders) slider.interactable = true;
     }
 
     public void UpdateAngle()
@@ -40,5 +43,15 @@ public class SliderController : MonoBehaviour
     public void UpdateImpulse()
     {
         impulse.UpdateImpulse();
+    }
+
+    public void DisableSliders()
+    {
+        foreach (Slider slider in sliders) slider.interactable = false;
+    }
+
+    public void EnableSliders()
+    {
+        foreach (Slider slider in sliders) slider.interactable = true;
     }
 }

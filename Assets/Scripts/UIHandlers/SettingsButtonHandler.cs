@@ -13,12 +13,12 @@ public class SettingsButtonHandler : MonoBehaviour
 
     public void Open()
     {
-        LeanTween.rotate(gameObject, new Vector3(0, 0, rotateAngle), rotateDuration).setEase(ease);
+        LeanTween.rotate(gameObject, new Vector3(0, 0, rotateAngle), rotateDuration).setEase(ease).setIgnoreTimeScale(true);
     }
 
     public void Close()
     {
-        LeanTween.rotate(gameObject, new Vector3(0, 0, 0), rotateDuration).setEase(ease);
+        LeanTween.rotate(gameObject, new Vector3(0, 0, 0), rotateDuration).setEase(ease).setIgnoreTimeScale(true);
     }
 
     public void DisableButton()

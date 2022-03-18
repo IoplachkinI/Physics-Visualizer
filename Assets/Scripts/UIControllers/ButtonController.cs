@@ -7,6 +7,7 @@ public class ButtonController : MonoBehaviour
 {
     private enum State {Running, Paused, Stopped};
     private ImpulseSliderController impulseController;
+    private SliderController sliderController;
     [SerializeField] private MenuHandler menuHandler;
     [SerializeField] private SettingsButtonHandler settingsHandler;
     [SerializeField] private PauseButtonHandler pauseHandler;
@@ -21,6 +22,7 @@ public class ButtonController : MonoBehaviour
     public void OnEnable()
     {
         impulseController = GetComponent<ImpulseSliderController>();
+        sliderController = GetComponent<SliderController>();
 
         state = State.Stopped;
         menuOpened = false;
@@ -28,6 +30,7 @@ public class ButtonController : MonoBehaviour
         foreach (GameObject obj in stopppedDisplays) obj.SetActive(true);
         block.GetComponent<Rigidbody2D>().isKinematic = true;
         settingsHandler.EnableButton();
+        
         stopHandler.DisableButton();
         pauseHandler.Pause();
     }
@@ -38,12 +41,14 @@ public class ButtonController : MonoBehaviour
         {
             menuOpened = false;
             settingsHandler.Close();
+            sliderController.DisableSliders();
             menuHandler.Close();
         }
         else
         {
             menuOpened = true;
             settingsHandler.Open();
+            sliderController.EnableSliders();
             menuHandler.Open();
         }
     }
@@ -59,6 +64,7 @@ public class ButtonController : MonoBehaviour
         block.transform.position = Vector3.zero;
         pauseHandler.Pause();
         settingsHandler.EnableButton();
+        sliderController.EnableSliders();
         stopHandler.DisableButton();
         timeHandler.updateTime = false;
         timeHandler.ResetTime();
@@ -102,6 +108,7 @@ public class ButtonController : MonoBehaviour
                     rb.AddForce(impulseController.GetImpulse() * rb.mass, ForceMode2D.Impulse);
                     rb.WakeUp();
                     settingsHandler.DisableButton();
+                    sliderController.DisableSliders();
                     stopHandler.EnableButton();
                     pauseHandler.Play();
                     break;

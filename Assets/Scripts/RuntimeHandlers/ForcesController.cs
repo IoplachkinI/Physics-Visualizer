@@ -38,10 +38,13 @@ public class ForcesController : MonoBehaviour
         float angle = -Mathf.Deg2Rad * block.transform.rotation.eulerAngles.z;
         mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
         N = mg.magnitude * Mathf.Cos(angle) * block.transform.up.normalized;
-        Fr = N.magnitude * friction * -rb.velocity.normalized;
+        //Fr = N.magnitude * friction * -Vector3.Project(rb.velocity.normalized, block.transform.right);
+        //Fr = N.magnitude * friction * -block.transform.right;
+        Fr = -Vector3.Project(mg, rb.velocity) * friction;
         if (N.magnitude * friction >= mg.magnitude * Mathf.Sin(angle) - 0.00001f)
         {
-            Fr = -Vector3.Project(mg, block.transform.right) * friction;
+
+            Fr = -Vector3.Project(mg, rb.velocity) * friction;
         }
 
         Debug.Log(string.Format("{0:f5} {1:f5} {2:f5}\n", mg, N, Fr));

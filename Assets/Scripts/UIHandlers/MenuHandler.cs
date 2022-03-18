@@ -16,12 +16,12 @@ public class MenuHandler : MonoBehaviour
 
     public void Open()
     {
-        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), endX, duration).setEase(ease);
+        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), endX, duration).setEase(ease).setIgnoreTimeScale(true);
     }
 
     public void Close()
     {
-        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), startX, duration).setEase(ease);
+        LeanTween.moveX(gameObject.GetComponent<RectTransform>(), startX, duration).setEase(ease).setIgnoreTimeScale(true);
     }
 
 }
