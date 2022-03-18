@@ -106,7 +106,6 @@ public class ButtonController : MonoBehaviour
                     foreach (GameObject obj in stopppedDisplays) obj.SetActive(false);
                     rb.isKinematic = false;
                     rb.AddForce(impulseController.GetImpulse() * rb.mass, ForceMode2D.Impulse);
-                    rb.WakeUp();
                     settingsHandler.DisableButton();
                     sliderController.DisableSliders();
                     stopHandler.EnableButton();

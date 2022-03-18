@@ -9,7 +9,7 @@ public class ImpulseSliderController : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject block;
-    private Vector3 impulse;
+    private Vector3 impulse = Vector3.zero;
 
     private void OnEnable()
     {
