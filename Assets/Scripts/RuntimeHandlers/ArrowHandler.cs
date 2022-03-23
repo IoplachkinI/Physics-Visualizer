@@ -16,7 +16,7 @@ public class ArrowHandler : MonoBehaviour
     private float EPSILON = 0.00001f;
     public bool followTargetRotation = true;
 
-    [HideInInspector] public float arrowLen = 1f;
+    public Vector2 size = Vector2.one;
 
     public void OnEnable()
     {
@@ -25,9 +25,7 @@ public class ArrowHandler : MonoBehaviour
 
     public void UpdateArrows()
     {
-        Vector3 size = body.GetComponent<SpriteRenderer>().size;
-
-        size.y = arrowLen;
+        //body.GetComponent<SpriteRenderer>().size = size;
 
         if (Mathf.Abs(size.y) < threshold + EPSILON)
         {
@@ -44,7 +42,7 @@ public class ArrowHandler : MonoBehaviour
             foreach (GameObject item in additionalItems) item.SetActive(true);
         }
 
-        head.transform.localPosition = size + new Vector3(-size.x, 0, 0);
+        head.transform.localPosition = size;
 
         if (followTargetRotation) transform.rotation = Quaternion.Euler(0, 0, target.transform.rotation.eulerAngles.z + offset);
         else transform.rotation = Quaternion.Euler(0, 0, offset);

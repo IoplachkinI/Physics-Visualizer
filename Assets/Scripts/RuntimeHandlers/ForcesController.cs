@@ -20,6 +20,7 @@ public class ForcesController : MonoBehaviour
     public void OnEnable()
     {
         UpdateForces();
+        UpdateVectors();
     }
 
     public void FixedUpdate()
@@ -39,7 +40,7 @@ public class ForcesController : MonoBehaviour
         mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
         N = mg.magnitude * Mathf.Cos(angle) * block.transform.up.normalized;
         Fr = N.magnitude * friction * Vector3.Project(-rb.velocity.normalized, block.transform.right);
-        if (N.magnitude * friction >= mg.magnitude * Mathf.Sin(angle) - 0.01f && rb.velocity.magnitude < 0.1f)
+        if (N.magnitude * friction >= mg.magnitude * Mathf.Sin(angle) - 0.01f && rb.velocity.magnitude < 0.2005f)
         {
             Fr = Vector3.Project(-mg, rb.velocity);
             rb.velocity = Vector2.zero;
@@ -47,17 +48,15 @@ public class ForcesController : MonoBehaviour
         else
         {
             rb.AddForce(mg + N + Fr);
-            Debug.Log("FORCE ADDED\n");
         }
-        //Debug.Log(string.Format("{0:f5} {1:f5} {2:f5}\n", mg, N, Fr));
 
     }
 
     public void UpdateVectors()
     {
-        mgArrow.arrowLen = minLen + k * mg.magnitude;
-        nArrow.arrowLen = minLen + k * N.magnitude;
-        frArrow.arrowLen = minLen + k * Fr.magnitude;
-        velocity.arrowLen = block.GetComponent<Rigidbody2D>().velocity.magnitude;
+        mgArrow.size = mg;
+        nArrow.size = N;
+        frArrow.size = Fr;
+        velocity.size = block.GetComponent<Rigidbody2D>().velocity;
     }
 }

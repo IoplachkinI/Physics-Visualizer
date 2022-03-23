@@ -37,6 +37,7 @@ public class SliderController : MonoBehaviour
     public void UpdateFriction()
     {
         friction.UpdateFriction();
+        forces.friction = friction.GetFriction();
         forces.UpdateVectors();
     }
 
