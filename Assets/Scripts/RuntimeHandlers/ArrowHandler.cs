@@ -44,11 +44,11 @@ public class ArrowHandler : MonoBehaviour
 
         head.transform.localPosition = size;
 
-        if (followTargetRotation) transform.rotation = Quaternion.Euler(0, 0, target.transform.rotation.eulerAngles.z + offset);
-        else transform.rotation = Quaternion.Euler(0, 0, offset);
+        //if (followTargetRotation) transform.rotation = Quaternion.Euler(0, 0, target.transform.rotation.eulerAngles.z + offset);
+        //else transform.rotation = Quaternion.Euler(0, 0, offset);
 
-        if (size.y < 0f) head.GetComponent<SpriteRenderer>().flipY = true;
-        else head.GetComponent<SpriteRenderer>().flipY = false;
+        //if (size.y < 0f) head.GetComponent<SpriteRenderer>().flipY = true;
+        //else head.GetComponent<SpriteRenderer>().flipY = false;
 
         text.transform.position = (head.transform.position - transform.position)
             * 0.5f + target.transform.position;
