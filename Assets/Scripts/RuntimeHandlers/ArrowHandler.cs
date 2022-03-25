@@ -6,49 +6,87 @@ public class ArrowHandler : MonoBehaviour
 {
     [SerializeField] private GameObject body;
 
-    //NOT A HEAD PARENT, but a child, the parent is accessed through the child
     [SerializeField] private GameObject head;
     [SerializeField] private List<GameObject> additionalItems;
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject target;
-    public float offset = 0f;
     public float threshold = 0f;
-    private float EPSILON = 0.00001f;
-    public bool followTargetRotation = true;
+    public float maxLen = 12f;
+    public float minLen = 1f;
+    public float k = 0.1f;
 
-    public Vector2 size = Vector2.one;
+    [HideInInspector]
+    public Vector2 vector = Vector2.one;
+
+    private bool isVisible = true;
 
     public void OnEnable()
     {
-        UpdateArrows();
+        UpdateArrow();
     }
 
-    public void UpdateArrows()
+    public void Disable()
     {
-        //body.GetComponent<SpriteRenderer>().size = size;
+        isVisible = false;
 
-        if (Mathf.Abs(size.y) < threshold + EPSILON)
+        transform.position = new Vector3(
+            transform.position.x,
+            transform.position.y,
+            -100f
+            );
+        text.transform.position = new Vector3(
+            text.transform.position.x,
+            text.transform.position.y,
+            -100f
+            );
+        foreach (GameObject item in additionalItems) item.transform.position = new Vector3(
+            item.transform.position.x,
+            item.transform.position.y,
+            -100f
+            );
+    }
+
+    public void Enable()
+    {
+        isVisible = true;
+
+        transform.position = new Vector3(
+            transform.position.x,
+            transform.position.y,
+            0f
+            );
+        text.transform.position = new Vector3(
+            text.transform.position.x,
+            text.transform.position.y,
+            0f
+            );
+        foreach (GameObject item in additionalItems) item.transform.position = new Vector3(
+            item.transform.position.x,
+            item.transform.position.y,
+            0f
+            );
+    }
+
+    public void UpdateArrow()
+    {
+        vector = vector.normalized * minLen + vector * k;
+        if (isVisible && vector.magnitude < threshold)
         {
-            gameObject.SetActive(false);
-            text.SetActive(false);
-            foreach (GameObject item in additionalItems) item.SetActive(false);
+            Disable();
             return;
         }
+        if (!isVisible && vector.magnitude > threshold) Enable();
+        if (!isVisible) return;
 
-        if (!gameObject.activeInHierarchy)
-        {
-            gameObject.SetActive(true);
-            text.SetActive(true);
-            foreach (GameObject item in additionalItems) item.SetActive(true);
-        }
+        if (vector.magnitude > maxLen) vector = vector.normalized * maxLen;
 
-        head.transform.localPosition = size;
+        head.transform.localPosition = vector;
+        head.transform.rotation = Quaternion.FromToRotation(Vector2.up, vector);
 
-        //if (followTargetRotation) transform.rotation = Quaternion.Euler(0, 0, target.transform.rotation.eulerAngles.z + offset);
-        //else transform.rotation = Quaternion.Euler(0, 0, offset);
-
-        //if (size.y < 0f) head.GetComponent<SpriteRenderer>().flipY = true;
-        //else head.GetComponent<SpriteRenderer>().flipY = false;
+        body.transform.rotation = Quaternion.FromToRotation(Vector2.up, vector);
+        body.GetComponent<SpriteRenderer>().size = new Vector2(
+            body.GetComponent<SpriteRenderer>().size.x,
+            vector.magnitude);
 
         text.transform.position = (head.transform.position - transform.position)
             * 0.5f + target.transform.position;
@@ -57,6 +95,6 @@ public class ArrowHandler : MonoBehaviour
 
     public void Update()
     {
-        UpdateArrows();        
+        UpdateArrow();        
     }
 }

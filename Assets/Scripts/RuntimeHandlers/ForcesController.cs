@@ -8,13 +8,11 @@ public class ForcesController : MonoBehaviour
     [SerializeField] private ArrowHandler mgArrow;
     [SerializeField] private ArrowHandler nArrow;
     [SerializeField] private ArrowHandler frArrow;
-    [SerializeField] private ArrowHandler velocity;
-    private Vector2 mg;
-    private Vector2 N;
-    private Vector2 Fr;
+    [SerializeField] private ArrowHandler vArrow;
+    private Vector2 mg = Vector2.one;
+    private Vector2 N = Vector2.one;
+    private Vector2 Fr = Vector2.one;
 
-    public float minLen = 1f;
-    public float k = 0.012f;
     public float friction = 0f;
 
     public void OnEnable()
@@ -40,9 +38,10 @@ public class ForcesController : MonoBehaviour
         mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
         N = mg.magnitude * Mathf.Cos(angle) * block.transform.up.normalized;
         Fr = N.magnitude * friction * Vector3.Project(-rb.velocity.normalized, block.transform.right);
+
         if (N.magnitude * friction >= mg.magnitude * Mathf.Sin(angle) - 0.01f && rb.velocity.magnitude < 0.2005f)
         {
-            Fr = Vector3.Project(-mg, rb.velocity);
+            Fr = -Vector3.Project(mg, block.transform.right);
             rb.velocity = Vector2.zero;
         }
         else
@@ -54,9 +53,9 @@ public class ForcesController : MonoBehaviour
 
     public void UpdateVectors()
     {
-        mgArrow.size = mg;
-        nArrow.size = N;
-        frArrow.size = Fr;
-        velocity.size = block.GetComponent<Rigidbody2D>().velocity;
+        mgArrow.vector = mg;
+        nArrow.vector = N;
+        frArrow.vector = Fr;
+        vArrow.vector = block.GetComponent<Rigidbody2D>().velocity;
     }
 }
