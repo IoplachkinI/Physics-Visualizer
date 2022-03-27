@@ -1740,6 +1740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 294493195}
   - component: {fileID: 294493196}
+  - component: {fileID: 294493197}
   m_Layer: 0
   m_Name: Velocity (Arrow)
   m_TagString: Untagged
@@ -1785,6 +1786,23 @@ MonoBehaviour:
   minLen: 1
   k: 0.04
   vector: {x: 1, y: 1}
+--- !u!114 &294493197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294493194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217a9d21672fa214ebf2bb13e2652825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  followTargetRotation: 0
+  followZAxis: 0
+  xOffset: 0
+  yOffset: 0
 --- !u!1 &298791623
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,6 +3226,8 @@ MonoBehaviour:
   target: {fileID: 1172071818}
   followTargetRotation: 0
   followZAxis: 0
+  xOffset: 0
+  yOffset: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -5009,7 +5029,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 742775383}
-  - component: {fileID: 742775384}
   m_Layer: 0
   m_Name: Arrows (Displays)
   m_TagString: Untagged
@@ -5035,21 +5054,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &742775384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742775382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217a9d21672fa214ebf2bb13e2652825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1172071818}
-  followTargetRotation: 0
-  followZAxis: 0
 --- !u!1 &760651076
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,7 +89,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\SliderControllers\AngleSliderController.cs" />
-    <Compile Include="Assets\Scripts\RuntimeHandlers\TargetFollow.cs" />
+    <Compile Include="Assets\Scripts\RuntimeHandlers\FollowTarget.cs" />
     <Compile Include="Assets\Scripts\RuntimeHandlers\ArrowHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />

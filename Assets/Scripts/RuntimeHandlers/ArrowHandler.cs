@@ -11,8 +11,8 @@ public class ArrowHandler : MonoBehaviour
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject target;
     public float threshold = 0f;
-    public float maxLen = 12f;
     public float minLen = 1f;
+    public float maxLen = 0f;
     public float k = 0.1f;
 
     [HideInInspector]
@@ -78,7 +78,6 @@ public class ArrowHandler : MonoBehaviour
         if (!isVisible && vector.magnitude > threshold) Enable();
         if (!isVisible) return;
 
-        if (vector.magnitude > maxLen) vector = vector.normalized * maxLen;
 
         head.transform.localPosition = vector;
         head.transform.rotation = Quaternion.FromToRotation(Vector2.up, vector);
