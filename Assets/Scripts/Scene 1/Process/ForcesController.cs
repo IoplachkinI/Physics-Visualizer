@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ForcesController : MonoBehaviour
 {
-    [SerializeField] private ButtonController bc;
-    [SerializeField] private Rigidbody2D body;
+    [SerializeField] private GameObject body;
     [SerializeField] private ArrowHandler mgArrow;
     [SerializeField] private ArrowHandler nArrow;
     [SerializeField] private ArrowHandler frArrow;
@@ -15,40 +14,66 @@ public class ForcesController : MonoBehaviour
     private Vector2 N = Vector2.one;
     private Vector2 Fr = Vector2.one;
 
+    public bool stopped { get; set; } = true;
     public float friction = 0f;
 
-    public void OnEnable()
+    public void UpdateAll()
+    {
+        UpdateForces();
+        UpdateArrows();
+    }
+
+    private void OnEnable()
+    {
+        UpdateAll();
+    }
+
+    private void FixedUpdate()
     {
         UpdateForces();
     }
 
-    public void FixedUpdate()
+    private void Update()
     {
-        UpdateForces();
+        UpdateArrows();
     }
 
-    private void UpdateForces()
+    public void UpdateForces()
     {
-        float angle = -Mathf.Deg2Rad * body.transform.rotation.eulerAngles.z;
-        mg = Vector2.down * Mathf.Abs(body.mass * Physics.gravity.y);
-        N = mg.magnitude * Mathf.Cos(angle) * body.transform.up.normalized;
-        Fr = N.magnitude * friction * Vector3.Project(-body.velocity.normalized, body.transform.right);
+        Rigidbody2D rb = body.GetComponent<Rigidbody2D>();
+        mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
+        N = -Vector3.Project(mg, body.transform.up);
+        Fr = N.magnitude * friction * -Vector3.Project(rb.velocity.normalized, body.transform.right);
+        
+        if (stopped && body.GetComponent<BodyHandler>().Impulse.magnitude > 0.001f)
+            Fr = N.magnitude * friction * -Vector3.Project(body.GetComponent<BodyHandler>().Impulse.normalized, body.transform.right);
 
-        if (N.magnitude * friction >= mg.magnitude * Mathf.Sin(angle) - 0.01f && body.velocity.magnitude < 0.2005f)
+        else if (stopped || rb.velocity.magnitude < 0.2f)
         {
-            Fr = -Vector3.Project(mg, body.transform.right);
-            body.velocity = Vector2.zero;
+            if (N.magnitude * friction > Vector3.Project(mg, body.transform.right).magnitude - 0.001f)
+            {
+                Fr = -Vector3.Project(mg, body.transform.right);
+                rb.velocity = Vector2.zero;
+            }
+
+            else Fr = N.magnitude * friction * -body.transform.right;
         }
-        else
+
+        if ((mg + N + Fr).magnitude / rb.mass < 0.01f)
         {
-            body.AddForce(mg + N + Fr);
+            Debug.Log("No forces?");
+            return;
         }
+        rb.AddForce(mg + N + Fr);
+    }
 
-        maArrow.vector = mg;
-        mgArrow.vector = mg;
-        nArrow.vector = N;
-        frArrow.vector = Fr;
-        vArrow.vector = body.GetComponent<Rigidbody2D>().velocity;
-
+    public void UpdateArrows()
+    {
+        maArrow.UpdateArrow(mg + N + Fr);
+        mgArrow.UpdateArrow(mg);
+        nArrow.UpdateArrow(N);
+        frArrow.UpdateArrow(Fr);
+        if (stopped) vArrow.UpdateArrow(body.GetComponent<BodyHandler>().Impulse);
+        else vArrow.UpdateArrow(body.GetComponent<Rigidbody2D>().velocity);
     }
 }

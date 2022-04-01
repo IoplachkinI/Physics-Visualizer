@@ -7,23 +7,17 @@ public class ArrowHandler : MonoBehaviour
     [SerializeField] private GameObject body;
 
     [SerializeField] private GameObject head;
-    [SerializeField] private List<GameObject> additionalItems;
     [SerializeField] private GameObject text;
     [SerializeField] private GameObject target;
+
     public float threshold = 0f;
     public float k = 0.1f;
     public float maxLen = 0f;
     public float minLen = 1f;
-
-    [HideInInspector]
-    public Vector2 vector = Vector2.one;
+    public float textRotation = 0f;
+    public float textDistance = 1.5f;
 
     private bool isVisible = true;
-
-    public void OnEnable()
-    {
-        UpdateArrow();
-    }
 
     public void Disable()
     {
@@ -37,11 +31,6 @@ public class ArrowHandler : MonoBehaviour
         text.transform.position = new Vector3(
             text.transform.position.x,
             text.transform.position.y,
-            -100f
-            );
-        foreach (GameObject item in additionalItems) item.transform.position = new Vector3(
-            item.transform.position.x,
-            item.transform.position.y,
             -100f
             );
     }
@@ -60,17 +49,12 @@ public class ArrowHandler : MonoBehaviour
             text.transform.position.y,
             0f
             );
-        foreach (GameObject item in additionalItems) item.transform.position = new Vector3(
-            item.transform.position.x,
-            item.transform.position.y,
-            0f
-            );
     }
 
-    public void UpdateArrow()
+    public void UpdateArrow(Vector2 vector)
     {
         vector = vector.normalized * minLen + vector * k;
-        if (vector.magnitude > maxLen && maxLen > 0.001f) vector = vector.normalized * maxLen;
+        if (maxLen > 0.01f && vector.magnitude > maxLen) vector = vector.normalized * maxLen;
 
         if (isVisible && vector.magnitude < minLen + threshold)
         {
@@ -88,12 +72,10 @@ public class ArrowHandler : MonoBehaviour
             body.GetComponent<SpriteRenderer>().size.x,
             vector.magnitude);
 
-        text.transform.position = (transform.position + head.transform.position) / 2f;
+        text.transform.localPosition = head.transform.localPosition + 
+            Quaternion.Euler(0, 0, textRotation) * (head.GetComponent<SpriteRenderer>().size.x * textDistance * head.transform.right);
 
     }
 
-    public void Update()
-    {
-        UpdateArrow();        
-    }
+
 }

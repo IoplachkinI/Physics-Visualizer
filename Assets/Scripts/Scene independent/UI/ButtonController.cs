@@ -32,9 +32,16 @@ public class ButtonController : MonoBehaviour
 
     public void SettingsButtonPressed()
     {
-        if (menuOpened) MenuClose.Invoke();
-        else MenuOpen.Invoke();
-        menuOpened = !menuOpened;
+        if (menuOpened)
+        {
+            MenuClose.Invoke();
+            menuOpened = false;
+        }
+        else
+        {
+            MenuOpen.Invoke();
+            menuOpened = true;
+        }
     }
 
     public void StopButtonPressed()
@@ -45,7 +52,6 @@ public class ButtonController : MonoBehaviour
 
     public void PauseButtonPressed()
     {
-        Rigidbody2D rb = body.GetComponent<Rigidbody2D>();
         switch (state)
         {
             case State.Running:
@@ -65,6 +71,7 @@ public class ButtonController : MonoBehaviour
                     state = State.Running;
                     Start.Invoke();
                     MenuClose.Invoke();
+                    menuOpened = false;
                     break;
                 }
         }
