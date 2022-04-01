@@ -19,6 +19,11 @@ public class ArrowHandler : MonoBehaviour
 
     private bool isVisible = true;
 
+    public bool IsVisible()
+    {
+        return isVisible;
+    }
+
     public void Disable()
     {
         isVisible = false;

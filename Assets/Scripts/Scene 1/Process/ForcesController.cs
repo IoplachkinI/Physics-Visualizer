@@ -59,11 +59,7 @@ public class ForcesController : MonoBehaviour
             else Fr = N.magnitude * friction * -body.transform.right;
         }
 
-        if ((mg + N + Fr).magnitude / rb.mass < 0.01f)
-        {
-            Debug.Log("No forces?");
-            return;
-        }
+        if (!maArrow.IsVisible()) return;
         rb.AddForce(mg + N + Fr);
     }
 

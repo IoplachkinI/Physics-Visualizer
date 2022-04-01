@@ -6,20 +6,12 @@ using UnityEngine.UI;
 public class SliderController : MonoBehaviour
 {
 
-    [SerializeField]
-    private List<Slider> sliders;
-
-    [SerializeField]
-    private Text angleT, frictionT;
-
-    [SerializeField]
-    private GameObject body;
-
-    [SerializeField]
-    private GameObject planeParent;
-
-    [SerializeField]
-    private ForcesController forcesC;
+    [SerializeField] private List<Slider> sliders;
+    [SerializeField] private Text angleT, frictionT;
+    [SerializeField] private GameObject body;
+    [SerializeField] private GameObject planeParent;
+    [SerializeField] private ForcesController forcesC;
+    [SerializeField] private TimeHandler timeH;
 
     public void DisableSliders()
     {
@@ -31,7 +23,7 @@ public class SliderController : MonoBehaviour
         foreach (Slider slider in sliders) slider.interactable = true;
     }
 
-    public void UpdateAngle(Slider sender)
+    public void SetAngle(Slider sender)
     {
         BodyHandler bodyH = body.GetComponent<BodyHandler>();
         float angle = -sender.value;
@@ -45,7 +37,7 @@ public class SliderController : MonoBehaviour
         forcesC.UpdateAll();
     }
 
-    public void UpdateMass(Slider sender)
+    public void SetMass(Slider sender)
     {
         float val = sender.value;
         if (val >= 100f) val -= 99f;
@@ -55,17 +47,22 @@ public class SliderController : MonoBehaviour
         forcesC.UpdateAll();
     }
 
-    public void UpdateFriction(Slider sender)
+    public void SetFriction(Slider sender)
     {
         forcesC.friction = sender.value;
         frictionT.text = string.Format(" Œ›‘‘. “–≈Õ»ﬂ: {0:f2}", sender.value);
         forcesC.UpdateAll();
     }
 
-    public void UpdateImpulse(Slider sender)
+    public void SetImpulse(Slider sender)
     {
         body.GetComponent<BodyHandler>().Impulse = sender.value * body.transform.right;
         forcesC.UpdateAll();
+    }
+
+    public void SetTimeScale(Slider sender)
+    {
+        timeH.SetTimeScale(sender.value / 10f);
     }
 
 }
