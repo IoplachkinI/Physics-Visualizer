@@ -9,7 +9,7 @@ namespace Scene2
     public class SliderController : MonoBehaviour
     {
         [SerializeField] private List<Slider> sliders;
-        [SerializeField] private Text anglePlaneT, angleBodyT;
+        [SerializeField] private Text anglePlaneT, angleBodyT, heightT;
         [SerializeField] private GameObject body;
         [SerializeField] private GameObject planeParent;
         [SerializeField] private Scene2.ForcesController forcesC;
@@ -32,7 +32,8 @@ namespace Scene2
             float angle = sender.value;
             Quaternion target = Quaternion.Euler(0, 0, angle);
             angleBodyT.text = string.Format("”√ŒÀ œŒÀ≈“¿: {0:f0}", Mathf.Abs(angle));
-            bodyH.ImpulseDir = target * body.transform.right;
+            bodyH.ImpulseDirRel = target * Vector2.right;
+            body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
             forcesC.UpdateAll();
         }
 
@@ -43,8 +44,8 @@ namespace Scene2
             anglePlaneT.text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿ œÀŒ— Œ—“»: {0:f0}", Mathf.Abs(angle));
             planeParent.transform.rotation = target;
             body.transform.rotation = target;
-            body.transform.position = target * body.GetComponent<BodyHandler>().GetDefStartingPos();
-            body.GetComponent<BodyHandler>().StartingPos = body.transform.position;
+            body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
+            body.GetComponent<BodyHandler>().SetRotatedDefStartingPos(target);
             forcesC.UpdateAll();
 
         }
@@ -72,7 +73,8 @@ namespace Scene2
 
         public void setHeight(Slider sender)
         {
-            body.GetComponent<BodyHandler>().StartingPos = body.GetComponent<BodyHandler>().GetDefStartingPos() + new Vector2(0, sender.value / 100f);
+            body.GetComponent<BodyHandler>().StartingPos = body.GetComponent<BodyHandler>().GetRotatedDefStartingPos() + new Vector2(0, sender.value / 100f);
+            heightT.text = string.Format("Õ¿◊¿À‹Õ¿ﬂ \n¬€—Œ“¿: {0:f2} Ï", sender.value / 100f);
             forcesC.UpdateAll();
         }
     }

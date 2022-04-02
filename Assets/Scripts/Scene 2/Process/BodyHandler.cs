@@ -12,12 +12,14 @@ namespace Scene2
         private bool inSimulation = false;
 
         [SerializeField] private Vector2 defStartingPos;
+        private Vector2 rotatedDefStartingPos;
         public Vector2 startingPos;
 
         private Vector2 impulse; //WITHOUT CONSIDERATION FOR MASS
 
         private float impulseMag = 0f;
         private Vector2 impulseDir = Vector2.right;
+        private Vector2 impulseDirRel = Vector2.right;
 
         public float ImpulseMag
         {
@@ -29,6 +31,19 @@ namespace Scene2
             {
                 impulseMag = value;
                 impulse = impulseDir * impulseMag;
+                Update();
+            }
+        }
+
+        public Vector2 ImpulseDirRel
+        {
+            get
+            {
+                return impulseDirRel;
+            }
+            set
+            {
+                impulseDirRel = value.normalized;
                 Update();
             }
         }
@@ -76,6 +91,7 @@ namespace Scene2
         {
             rb = GetComponent<Rigidbody2D>();
             startingPos = defStartingPos;
+            rotatedDefStartingPos = defStartingPos;
         }
 
         private void Update()
@@ -91,6 +107,7 @@ namespace Scene2
             {
                 rb = GetComponent<Rigidbody2D>();
                 startingPos = defStartingPos;
+                rotatedDefStartingPos = defStartingPos;
             }
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
@@ -129,9 +146,16 @@ namespace Scene2
             else velT.text = string.Format("V={0:f1}ì/ñ", impulse.magnitude);
         }
 
-        public Vector2 GetDefStartingPos()
+        public Vector2 GetRotatedDefStartingPos()
         {
-            return defStartingPos;
+            return rotatedDefStartingPos;
+        }
+
+        public void SetRotatedDefStartingPos(Quaternion rotation)
+        {
+            Vector2 diff = startingPos - rotatedDefStartingPos;
+            rotatedDefStartingPos = rotation * defStartingPos;
+            StartingPos = rotatedDefStartingPos + diff;
         }
 
     }

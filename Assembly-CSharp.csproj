@@ -128,7 +128,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
-    <Compile Include="Assets\Scripts\Scene independent\UI\ProcessController.cs" />
+    <Compile Include="Assets\Scripts\Scene independent\Process\ProcessController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
     <Compile Include="Assets\Scripts\Scene independent\UI\StopButtonHandler.cs" />
@@ -144,6 +144,7 @@
     <Compile Include="Assets\Scripts\Scene 2\UI\SliderController.cs" />
     <Compile Include="Assets\Scripts\Scene 2\Process\ForcesController.cs" />
     <Compile Include="Assets\Scripts\Scene 2\Process\CollisionHandler.cs" />
+    <Compile Include="Assets\Scripts\Scene independent\Process\RepeatingBackground.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class TimeHandler : MonoBehaviour
 {
     [SerializeField] Text text;
+    [SerializeField] float TimeLimit = 60f;
+    private ProcessController pc;
     private float time = 0f;
     private bool update = false;
     private float defFixedDelta;
@@ -14,6 +16,7 @@ public class TimeHandler : MonoBehaviour
     private void OnEnable()
     {
         defFixedDelta = Time.fixedDeltaTime;
+        pc = GetComponent<ProcessController>();
         UpdateText();
     }
 
@@ -49,6 +52,7 @@ public class TimeHandler : MonoBehaviour
     private void UpdateTime()
     {
         time += Time.deltaTime;
+        if (time >= TimeLimit) pc.PauseNoResume.Invoke();
     }
 
     public void SetTimeScale(float scale)
