@@ -15,6 +15,7 @@ public class ProcessController : MonoBehaviour
     public UnityEvent Pause;
     public UnityEvent Resume;
     public UnityEvent Stop;
+    public UnityEvent PauseNoResume;
     public UnityEvent MenuOpen;
     public UnityEvent MenuClose;
 

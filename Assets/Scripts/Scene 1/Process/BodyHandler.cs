@@ -9,8 +9,11 @@ namespace Scene1
     {
 
         private Rigidbody2D rb;
+
+        public Vector2 startingPos;
+        private Vector2 lastPos;
+
         private Vector2 impulse; //WITHOUT CONSIDERATION FOR MASS (AS IF THE MASS IS 1kg)
-        private Vector2 startingPos;
         private bool inSimulation = false;
         public Vector2 Impulse
         {
@@ -30,7 +33,6 @@ namespace Scene1
         public void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
-            startingPos = rb.transform.position;
         }
 
         private void Update()
@@ -47,18 +49,21 @@ namespace Scene1
 
         public void StopSimulation()
         {
-            if (rb == null) rb = GetComponent<Rigidbody2D>();
-            if (startingPos == null) startingPos = rb.transform.position;
+            if (rb == null)
+            {
+                lastPos = startingPos;
+                rb = GetComponent<Rigidbody2D>();
+            }
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
-            rb.position = startingPos;
+            transform.position = lastPos;
             inSimulation = false;
         }
 
         public void StartSimulation()
         {
             if (rb == null) rb = GetComponent<Rigidbody2D>();
-            if (startingPos == null) startingPos = rb.transform.position;
+            lastPos = rb.position;
             rb.isKinematic = false;
             rb.AddForce(impulse * rb.mass, ForceMode2D.Impulse);
             inSimulation = true;

@@ -29,10 +29,10 @@ namespace Scene2
         public void SetBodyAngle(Slider sender)
         {
             BodyHandler bodyH = body.GetComponent<BodyHandler>();
-            float angle = -sender.value;
+            float angle = sender.value;
             Quaternion target = Quaternion.Euler(0, 0, angle);
             angleBodyT.text = string.Format("”√ŒÀ œŒÀ≈“¿: {0:f0}", Mathf.Abs(angle));
-            bodyH.Impulse = target * bodyH.Impulse;
+            bodyH.ImpulseDir = target * body.transform.right;
             forcesC.UpdateAll();
         }
 
@@ -42,7 +42,10 @@ namespace Scene2
             Quaternion target = Quaternion.Euler(0, 0, angle);
             anglePlaneT.text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿ œÀŒ— Œ—“»: {0:f0}", Mathf.Abs(angle));
             planeParent.transform.rotation = target;
-            body.transform.position = target * body.transform.position;
+            body.transform.rotation = target;
+            body.transform.position = target * body.GetComponent<BodyHandler>().GetDefStartingPos();
+            body.GetComponent<BodyHandler>().StartingPos = body.transform.position;
+            forcesC.UpdateAll();
 
         }
 
@@ -58,13 +61,19 @@ namespace Scene2
 
         public void SetImpulse(Slider sender)
         {
-            body.GetComponent<BodyHandler>().Impulse = sender.value * body.transform.right;
+            body.GetComponent<BodyHandler>().ImpulseMag = sender.value;
             forcesC.UpdateAll();
         }
 
         public void SetTimeScale(Slider sender)
         {
             timeH.SetTimeScale(sender.value / 10f);
+        }
+
+        public void setHeight(Slider sender)
+        {
+            body.GetComponent<BodyHandler>().StartingPos = body.GetComponent<BodyHandler>().GetDefStartingPos() + new Vector2(0, sender.value / 100f);
+            forcesC.UpdateAll();
         }
     }
 }

@@ -8,8 +8,44 @@ namespace Scene2
     {
         private Rigidbody2D rb;
 
-        private Vector2 impulse;
-        [SerializeField] private Vector2 startingPos;
+        [SerializeField] private TextMesh massT, velT, velxT, velyT;
+        private bool inSimulation = false;
+
+        [SerializeField] private Vector2 defStartingPos;
+        public Vector2 startingPos;
+
+        private Vector2 impulse; //WITHOUT CONSIDERATION FOR MASS
+
+        private float impulseMag = 0f;
+        private Vector2 impulseDir = Vector2.right;
+
+        public float ImpulseMag
+        {
+            get
+            {
+                return impulseMag;
+            }
+            set
+            {
+                impulseMag = value;
+                impulse = impulseDir * impulseMag;
+                Update();
+            }
+        }
+
+        public Vector2 ImpulseDir
+        {
+            get
+            {
+                return impulseDir;
+            }
+            set
+            {
+                impulseDir = value.normalized;
+                impulse = impulseDir * impulseMag;
+                Update();
+            }
+        }
         public Vector2 Impulse
         {
             get
@@ -23,12 +59,23 @@ namespace Scene2
             }
         }
 
-        [SerializeField] private TextMesh massT, velT, velxT, velyT;
-        private bool inSimulation = false;
+        public Vector2 StartingPos
+        {
+            get
+            {
+                return startingPos;
+            }
+            set
+            {
+                startingPos = value;
+                transform.position = startingPos;
+            }
+        }
 
         public void OnEnable()
         {
             rb = GetComponent<Rigidbody2D>();
+            startingPos = defStartingPos;
         }
 
         private void Update()
@@ -39,10 +86,15 @@ namespace Scene2
 
         public void StopSimulation()
         {
-            if (rb == null) rb = GetComponent<Rigidbody2D>();
+            //(SOMETIMES) The event calls the method earlier than OnEnable and Start so the variables need to be initialized here too
+            if (rb == null) 
+            {
+                rb = GetComponent<Rigidbody2D>();
+                startingPos = defStartingPos;
+            }
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
-            rb.position = startingPos;
+            transform.position = startingPos;
             inSimulation = false;
         }
 
@@ -77,7 +129,10 @@ namespace Scene2
             else velT.text = string.Format("V={0:f1}ì/ñ", impulse.magnitude);
         }
 
-
+        public Vector2 GetDefStartingPos()
+        {
+            return defStartingPos;
+        }
 
     }
 }
