@@ -25,14 +25,14 @@ public class TimeHandler : MonoBehaviour
 
     public void _Start()
     {
-        update = true;
         Time.timeScale = timeScale;
+        update = true;
     }
 
     public void _Pause()
     {
-        update = false;
         Time.timeScale = 0f;
+        update = false;
     }
 
     public void _Stop()
@@ -53,8 +53,8 @@ public class TimeHandler : MonoBehaviour
 
     public void SetTimeScale(float scale)
     {
-        timeScale = scale;
         Time.fixedDeltaTime = defFixedDelta * scale;
+        timeScale = scale;
     }
 
 }

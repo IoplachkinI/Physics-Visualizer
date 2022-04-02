@@ -56,7 +56,7 @@ public class ArrowHandler : MonoBehaviour
             );
     }
 
-    public void UpdateArrow(Vector2 vector)
+    public void SetVector(Vector2 vector)
     {
         vector = vector.normalized * minLen + vector * k;
         if (maxLen > 0.01f && vector.magnitude > maxLen) vector = vector.normalized * maxLen;

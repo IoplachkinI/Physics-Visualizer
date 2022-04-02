@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class ButtonController : MonoBehaviour
+public class ProcessController : MonoBehaviour
 {
     public enum State {Running, Paused, Stopped};
-    private SliderController sliderC;
     [SerializeField] private GameObject body;
     private State state = State.Stopped;
     private bool menuOpened = false;

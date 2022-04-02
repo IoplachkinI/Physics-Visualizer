@@ -232,6 +232,7 @@ MonoBehaviour:
   - {fileID: 949692331}
   - {fileID: 1559871962}
   - {fileID: 1472045002}
+  - {fileID: 881341208}
   angleT: {fileID: 559502047}
   frictionT: {fileID: 1171859074}
   body: {fileID: 1172071818}
@@ -3807,7 +3808,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0423\u0413\u041E\u041B \u041D\u0410\u041A\u041B\u041E\u041D\u0410: 0"
+  m_Text: "\u0423\u0413\u041E\u041B \u041D\u0410\u041A\u041B\u041E\u041D\u0410 \u041F\u041B\u041E\u0421\u041A\u041E\u0421\u0422\u0418:
+    0"
 --- !u!222 &559502048
 CanvasRenderer:
   m_ObjectHideFlags: 0
