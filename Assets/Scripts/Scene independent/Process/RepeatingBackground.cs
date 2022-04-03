@@ -18,15 +18,6 @@ public class RepeatingBackground : MonoBehaviour
         ResetBackground();
     }
 
-    private void OnDisable()
-    {
-        foreach (GameObject obj in levels)
-        {
-            if (obj == null) return;
-            foreach (Transform t in obj.transform) Destroy(t.gameObject);
-            obj.transform.DetachChildren();
-        }
-    }
     public void LoadChildObjects(GameObject obj)
     {
         obj.GetComponent<SpriteRenderer>().enabled = true;
@@ -140,7 +131,11 @@ public class RepeatingBackground : MonoBehaviour
 
     public void ResetBackground()
     {
-        OnDisable();
+        foreach (GameObject obj in levels)
+        {
+            foreach (Transform t in obj.transform) Destroy(t.gameObject);
+            obj.transform.DetachChildren();
+        }
 
         foreach (GameObject obj in levels) LoadChildObjects(obj);
 

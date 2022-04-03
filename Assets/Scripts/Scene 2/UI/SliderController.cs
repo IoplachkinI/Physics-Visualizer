@@ -34,7 +34,7 @@ namespace Scene2
             angleBodyT.text = string.Format("”√ŒÀ œŒÀ≈“¿: {0:f0}", Mathf.Abs(angle));
             bodyH.ImpulseDirRel = target * Vector2.right;
             body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
-            forcesC.UpdateAll();
+            forcesC.UpdateArrows();
         }
 
         public void SetPlaneAngle(Slider sender)
@@ -46,7 +46,7 @@ namespace Scene2
             body.transform.rotation = target;
             body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
             body.GetComponent<BodyHandler>().SetRotatedDefStartingPos(target);
-            forcesC.UpdateAll();
+            forcesC.UpdateArrows();
 
         }
 
@@ -57,13 +57,13 @@ namespace Scene2
             else if (val < 100f) val /= 100f;
 
             body.GetComponent<BodyHandler>().SetMass(val);
-            forcesC.UpdateAll();
+            forcesC.UpdateArrows();
         }
 
         public void SetImpulse(Slider sender)
         {
             body.GetComponent<BodyHandler>().ImpulseMag = sender.value;
-            forcesC.UpdateAll();
+            forcesC.UpdateArrows();
         }
 
         public void SetTimeScale(Slider sender)
@@ -75,7 +75,7 @@ namespace Scene2
         {
             body.GetComponent<BodyHandler>().StartingPos = body.GetComponent<BodyHandler>().GetRotatedDefStartingPos() + new Vector2(0, sender.value / 100f);
             heightT.text = string.Format("Õ¿◊¿À‹Õ¿ﬂ \n¬€—Œ“¿: {0:f2} Ï", sender.value / 100f);
-            forcesC.UpdateAll();
+            forcesC.UpdateArrows();
         }
     }
 }

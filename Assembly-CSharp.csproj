@@ -83,9 +83,8 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
-    <Compile Include="Assets\Scripts\Scene independent\Process\BoundaryHandler.cs" />
+    <Compile Include="Assets\Scripts\Scene 1\Process\BoundaryHandler.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
-    <Compile Include="Assets\Scripts\Scene independent\Process\PlaneParentFollow.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\Scene independent\Process\TargetFollow.cs" />
@@ -99,7 +98,6 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
     <Compile Include="Assets\Scripts\Scene independent\UI\SettingsButtonHandler.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
-    <Compile Include="Assets\Scripts\Scene independent\Process\CollisionCheck.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />

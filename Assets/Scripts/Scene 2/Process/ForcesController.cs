@@ -26,21 +26,7 @@ namespace Scene2
 
         private void Update()
         {
-            UpdateAll();
-        }
-
-        public void UpdateAll()
-        {
-            UpdateForces();
             UpdateArrows();
-        }
-
-        public void UpdateForces()
-        {
-            if (rb == null) rb = body.GetComponent<Rigidbody2D>();
-            mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
-
-            rb.AddForce(mg);
         }
 
         public void UpdateArrows()
@@ -52,11 +38,13 @@ namespace Scene2
             }
             else
             {
+
                 v.SetVector(rb.velocity);
             }
 
             vx.SetVector(new Vector2(v.GetVector().x, 0));
             vy.SetVector(new Vector2(0, v.GetVector().y));
+
         }
     }
 }

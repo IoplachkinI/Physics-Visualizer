@@ -12,6 +12,8 @@ namespace Scene2
         private bool inSimulation = false;
 
         [SerializeField] private Vector2 defStartingPos;
+        [SerializeField] private GameObject plane;
+        [SerializeField] private ProcessController pc;
         private Vector2 rotatedDefStartingPos;
         public Vector2 startingPos;
 
@@ -100,6 +102,7 @@ namespace Scene2
         }
 
 
+
         public void StopSimulation()
         {
             //(SOMETIMES) The event calls the method earlier than OnEnable and Start so the variables need to be initialized here too
@@ -117,6 +120,17 @@ namespace Scene2
 
         public void StartSimulation()
         {
+            Debug.Log(Vector2.Distance(impulseDir, plane.transform.right));
+            Debug.Log(Vector2.Distance(impulseDir, -plane.transform.right));
+            if ((startingPos == rotatedDefStartingPos)
+                && (Vector2.Distance(impulseDir, plane.transform.right) < 0.001f
+                    || Vector2.Distance(impulseDir, -plane.transform.right) < 0.001f
+                    || impulseMag < 0.0001f)
+                && (Vector2)plane.transform.right != Vector2.down)
+            {
+                pc.PauseNoResume.Invoke();
+                return;
+            }
             if (rb == null) rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = false;
             rb.AddForce(impulse * rb.mass, ForceMode2D.Impulse);

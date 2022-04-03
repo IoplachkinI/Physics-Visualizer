@@ -25,6 +25,11 @@ public class ArrowHandler : MonoBehaviour
         return isVisible;
     }
 
+    public bool IsMaxed()
+    {
+        return maxLen - vector.magnitude < 0.001f;
+    }
+
     public void Disable()
     {
         if (!isVisible) return;
