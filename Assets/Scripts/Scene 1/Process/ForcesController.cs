@@ -19,6 +19,7 @@ namespace Scene1
 
         public bool stopped { get; set; } = true;
         public float friction = 0f;
+        public float threshold = 0.05f;
 
         public void UpdateAll()
         {
@@ -44,6 +45,7 @@ namespace Scene1
         public void UpdateForces()
         {
             Rigidbody2D rb = body.GetComponent<Rigidbody2D>();
+            float _threshold = threshold * rb.mass;
             mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
             N = -Vector3.Project(mg, body.transform.up);
             Fr = N.magnitude * friction * -Vector3.Project(rb.velocity.normalized, body.transform.right);
@@ -53,16 +55,29 @@ namespace Scene1
 
             else if (stopped || rb.velocity.magnitude < 0.2f)
             {
-                if (N.magnitude * friction > Vector3.Project(mg, body.transform.right).magnitude - 0.001f)
+                if ((N.magnitude * friction * -body.transform.right).magnitude > Vector3.Project(mg, body.transform.right).magnitude - _threshold)
                 {
                     Fr = -Vector3.Project(mg, body.transform.right);
                     rb.velocity = Vector2.zero;
                 }
 
                 else Fr = N.magnitude * friction * -body.transform.right;
+
             }
 
-            if (!maArrow.IsVisible()) return;
+            if (mg.magnitude < _threshold) mgArrow.Disable();
+            else mgArrow.Enable();
+
+            if (N.magnitude < _threshold) nArrow.Disable();
+            else nArrow.Enable();
+
+            if (Fr.magnitude < _threshold) frArrow.Disable();
+            else frArrow.Enable();
+
+            if ((mg + N + Fr).magnitude < _threshold) maArrow.Disable();
+            else maArrow.Enable();
+
+            if ((mg + N + Fr).magnitude < _threshold) return;
             rb.AddForce(mg + N + Fr);
         }
 

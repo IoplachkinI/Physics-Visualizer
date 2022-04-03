@@ -52,7 +52,7 @@ public class TimeHandler : MonoBehaviour
     private void UpdateTime()
     {
         time += Time.deltaTime;
-        if (time >= TimeLimit) pc.PauseNoResume.Invoke();
+        if (time >= TimeLimit - 0.01f) pc.PauseNoResume.Invoke();
     }
 
     public void SetTimeScale(float scale)

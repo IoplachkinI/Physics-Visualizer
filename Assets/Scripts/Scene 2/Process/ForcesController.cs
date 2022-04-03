@@ -48,16 +48,15 @@ namespace Scene2
             if (stopped)
             {
                 BodyHandler bh = rb.GetComponent<BodyHandler>();
-                vx.SetVector(new Vector2(bh.Impulse.x, 0));
-                vy.SetVector(new Vector2(0, bh.Impulse.y));
                 v.SetVector(bh.Impulse);
             }
             else
             {
-                vx.SetVector(new Vector2(rb.velocity.x, 0));
-                vy.SetVector(new Vector2(0, rb.velocity.y));
                 v.SetVector(rb.velocity);
             }
+
+            vx.SetVector(new Vector2(v.GetVector().x, 0));
+            vy.SetVector(new Vector2(0, v.GetVector().y));
         }
     }
 }

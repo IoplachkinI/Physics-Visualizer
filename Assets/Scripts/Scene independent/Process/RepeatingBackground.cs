@@ -7,22 +7,33 @@ public class RepeatingBackground : MonoBehaviour
     public GameObject[] levels;
     private Camera mainCamera;
     private Vector2 screenBounds;
-    public float choke;
+    public float choke = 0f;
     public float scrollSpeed;
-    private bool resetting = false;
+    public float buffer = 1f;
 
     private void OnEnable()
     {
         mainCamera = gameObject.GetComponent<Camera>();
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        ResetBackground();
+    }
+
+    private void OnDisable()
+    {
+        foreach (GameObject obj in levels)
+        {
+            if (obj == null) return;
+            foreach (Transform t in obj.transform) Destroy(t.gameObject);
+            obj.transform.DetachChildren();
+        }
     }
     public void LoadChildObjects(GameObject obj)
     {
         obj.GetComponent<SpriteRenderer>().enabled = true;
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x - choke;
         float objectHeight = obj.GetComponent<SpriteRenderer>().bounds.size.y - choke;
-        int childrenNeededW = (int)Mathf.Ceil(screenBounds.x * 6 / objectWidth);
-        int childrenNeededH = (int)Mathf.Ceil(screenBounds.y * 6 / objectHeight);
+        int childrenNeededW = (int)Mathf.Ceil(screenBounds.x * 10 / objectWidth);
+        int childrenNeededH = (int)Mathf.Ceil(screenBounds.y * 10 / objectHeight);
 
         GameObject objCloneRow = new GameObject();
         objCloneRow.transform.position = obj.transform.position;
@@ -85,6 +96,8 @@ public class RepeatingBackground : MonoBehaviour
 
             halfObjectWidth = lastObj.GetComponent<SpriteRenderer>().bounds.extents.x - choke / 2f;
             halfObjectHeight = lastObj.GetComponent<SpriteRenderer>().bounds.extents.y - choke / 2f;
+
+            
             if (transform.position.x + screenBounds.x > lastObj.transform.position.x + halfObjectWidth)
             {
                 firstObj.transform.SetAsLastSibling();
@@ -100,37 +113,40 @@ public class RepeatingBackground : MonoBehaviour
         GameObject firstRow = rows[0];
         GameObject lastRow = rows[rows.Length - 1];
 
-        if (transform.position.y + screenBounds.y > lastRowChild.transform.position.y + halfObjectHeight)
-        {
-            firstRow.transform.SetAsLastSibling();
-            firstRow.transform.position = new Vector3(lastRow.transform.position.x, lastRowChild.transform.position.y + halfObjectHeight * 2, lastRow.transform.position.z);
-        }
-        else if (transform.position.y - screenBounds.y < firstRowChild.transform.position.y - halfObjectHeight)
+        if (transform.position.y + screenBounds.y > lastRowChild.transform.position.y + halfObjectHeight - buffer)
         {
             lastRow.transform.SetAsFirstSibling();
-            lastRow.transform.position = new Vector3(firstRow.transform.position.x, firstRowChild.transform.position.y - halfObjectHeight * 2, firstRow.transform.position.z);
+            for (int i = 0; i < rows.Length - 1; i++)
+            {
+                rows[i].transform.position = new Vector3(lastRow.transform.position.x,
+                lastRowChild.transform.position.y + halfObjectHeight * 2 * (i + 1),
+                lastRow.transform.position.z);
+            }
         }
+
+        else if (transform.position.y - screenBounds.y < firstRowChild.transform.position.y - halfObjectHeight + buffer)
+        {
+            firstRow.transform.SetAsLastSibling();
+            for (int i = 1; i < rows.Length; i++)
+            {
+                rows[i].transform.position = new Vector3(firstRow.transform.position.x,
+                firstRowChild.transform.position.y - halfObjectHeight * 2 * (rows.Length - i),
+                firstRow.transform.position.z);
+            }
+        }
+
 
     }
 
     public void ResetBackground()
     {
-        foreach (GameObject obj in levels)
-        {
-            foreach (Transform t in obj.GetComponentsInChildren<Transform>())
-            {
-                if (t.gameObject == obj) continue;
-                Destroy(t.gameObject);
-            }
-            obj.transform.DetachChildren();
-        }
+        OnDisable();
 
         foreach (GameObject obj in levels) LoadChildObjects(obj);
 
     }
     private void LateUpdate()
     {
-        Debug.Log(levels[0].transform.childCount);
         foreach (GameObject obj in levels)
         {
             RepositionChildObjects(obj);

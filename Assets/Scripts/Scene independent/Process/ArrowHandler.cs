@@ -18,6 +18,7 @@ public class ArrowHandler : MonoBehaviour
     public float textDistance = 1.5f;
 
     private bool isVisible = true;
+    public Vector2 vector = Vector2.zero;
 
     public bool IsVisible()
     {
@@ -26,6 +27,7 @@ public class ArrowHandler : MonoBehaviour
 
     public void Disable()
     {
+        if (!isVisible) return;
         isVisible = false;
 
         transform.position = new Vector3(
@@ -42,6 +44,7 @@ public class ArrowHandler : MonoBehaviour
 
     public void Enable()
     {
+        if (isVisible) return;
         isVisible = true;
 
         transform.position = new Vector3(
@@ -56,29 +59,37 @@ public class ArrowHandler : MonoBehaviour
             );
     }
 
-    public void SetVector(Vector2 vector)
+    public Vector2 GetVector()
     {
-        vector = vector.normalized * minLen + vector * k;
-        if (maxLen > 0.01f && vector.magnitude > maxLen) vector = vector.normalized * maxLen;
+        return vector;
+    }
 
-        if (isVisible && vector.magnitude < minLen + threshold)
+    public void SetVector(Vector2 _vector)
+    {
+        _vector = _vector.normalized * minLen + _vector * k;
+        if (maxLen > 0.01f && _vector.magnitude > maxLen) _vector = _vector.normalized * maxLen;
+        vector = _vector;
+
+        if (threshold > 0.0001f && isVisible && _vector.magnitude < minLen + threshold)
         {
             Disable();
             return;
         }
-        if (!isVisible && vector.magnitude > minLen + threshold) Enable();
+        if (threshold > 0.0001f && !isVisible && _vector.magnitude > minLen + threshold) Enable();
         if (!isVisible) return;
 
-        head.transform.localPosition = vector;
-        head.transform.rotation = Quaternion.FromToRotation(Vector2.up, vector);
+        head.transform.localPosition = _vector;
+        head.transform.rotation = Quaternion.FromToRotation(Vector2.up, _vector);
 
-        body.transform.rotation = Quaternion.FromToRotation(Vector2.up, vector);
+        body.transform.rotation = Quaternion.FromToRotation(Vector2.up, _vector);
         body.GetComponent<SpriteRenderer>().size = new Vector2(
             body.GetComponent<SpriteRenderer>().size.x,
-            vector.magnitude);
+            _vector.magnitude);
+        Vector3 right = head.transform.right;
+        if (right == Vector3.right && head.transform.up != Vector3.up) right = -right;
 
         text.transform.localPosition = head.transform.localPosition + 
-            Quaternion.Euler(0, 0, textRotation) * (head.GetComponent<SpriteRenderer>().size.x * textDistance * head.transform.right);
+            Quaternion.Euler(0, 0, textRotation) * (head.GetComponent<SpriteRenderer>().size.x * textDistance * right);
 
     }
 
