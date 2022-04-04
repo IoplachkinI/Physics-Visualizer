@@ -143,6 +143,7 @@
     <Compile Include="Assets\Scripts\Scene 2\Process\ForcesController.cs" />
     <Compile Include="Assets\Scripts\Scene 2\Process\CollisionHandler.cs" />
     <Compile Include="Assets\Scripts\Scene independent\Process\RepeatingBackground.cs" />
+    <Compile Include="Assets\Scripts\Scene 3\Process\ForcesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
