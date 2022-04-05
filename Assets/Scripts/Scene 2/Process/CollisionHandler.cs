@@ -14,7 +14,6 @@ public class CollisionHandler : MonoBehaviour
         if (collision.gameObject.CompareTag(_tag))
         {
             tookOff = true;
-            Debug.Log("started!");
         }
     }
 
@@ -24,7 +23,6 @@ public class CollisionHandler : MonoBehaviour
         {
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             pc.PauseNoResume.Invoke();
-            Debug.Log("Check (zb)");
         }
     }
 }

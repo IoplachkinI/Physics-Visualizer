@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Scene2
 {
@@ -8,7 +9,8 @@ namespace Scene2
     {
         private Rigidbody2D rb;
 
-        [SerializeField] private TextMesh massT, velT, velxT, velyT;
+        [SerializeField] private TextMesh massT, velT;
+        [SerializeField] private Text vxT, vyT;
         private bool inSimulation = false;
 
         [SerializeField] private Vector2 defStartingPos;
@@ -99,6 +101,8 @@ namespace Scene2
         private void Update()
         {
             UpdateText();
+            UpdateTextx();
+            UpdateTexty();
         }
 
 
@@ -120,8 +124,6 @@ namespace Scene2
 
         public void StartSimulation()
         {
-            Debug.Log(Vector2.Distance(impulseDir, plane.transform.right));
-            Debug.Log(Vector2.Distance(impulseDir, -plane.transform.right));
             if ((startingPos == rotatedDefStartingPos)
                 && (Vector2.Distance(impulseDir, plane.transform.right) < 0.001f
                     || Vector2.Distance(impulseDir, -plane.transform.right) < 0.001f
@@ -146,13 +148,13 @@ namespace Scene2
 
         public void UpdateTextx()
         {
-            if (inSimulation) velxT.text = string.Format("V={0:f1}ì/ñ", Mathf.Abs(rb.velocity.x));
-            else velxT.text = string.Format("V={0:f1}ì/ñ", Mathf.Abs(impulse.x));
+            if (inSimulation) vxT.text = string.Format("Vx = {0:f1} ì/ñ", rb.velocity.x);
+            else vxT.text = string.Format("Vx = {0:f1} ì/ñ", impulse.x);
         }
         public void UpdateTexty()
         {
-            if (inSimulation) velyT.text = string.Format("V={0:f1}ì/ñ", Mathf.Abs(rb.velocity.y));
-            else velyT.text = string.Format("V={0:f1}ì/ñ", Mathf.Abs(impulse.y));
+            if (inSimulation) vyT.text = string.Format("Vy = {0:f1} ì/ñ", rb.velocity.y);
+            else vyT.text = string.Format("Vy = {0:f1} ì/ñ", impulse.y);
         }
         public void UpdateText()
         {
