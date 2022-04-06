@@ -32,7 +32,7 @@ namespace Scene1
             Quaternion target = Quaternion.Euler(0, 0, angle);
             planeParent.transform.rotation = target;
             body.transform.rotation = target;
-            angleT.text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿: {0:f0}", Mathf.Abs(angle));
+            angleT.text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿: {0:f0}∞", Mathf.Abs(angle));
             bodyH.Impulse =
                 Vector3.Project(bodyH.Impulse, body.transform.right).normalized *
                 bodyH.Impulse.magnitude;

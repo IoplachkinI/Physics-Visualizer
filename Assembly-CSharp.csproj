@@ -144,6 +144,9 @@
     <Compile Include="Assets\Scripts\Scene independent\Process\RepeatingBackground.cs" />
     <Compile Include="Assets\Scripts\Scene 3\Process\ForcesController.cs" />
     <Compile Include="Assets\Scripts\Menu\SceneController.cs" />
+    <Compile Include="Assets\Scripts\Scene 3\UI\SliderController.cs" />
+    <Compile Include="Assets\Scripts\Scene 3\Process\BodyHandler.cs" />
+    <Compile Include="Assets\Scripts\Scene 3\Process\WedgeHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

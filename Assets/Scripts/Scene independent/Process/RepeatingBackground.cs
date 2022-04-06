@@ -88,42 +88,71 @@ public class RepeatingBackground : MonoBehaviour
             halfObjectWidth = lastObj.GetComponent<SpriteRenderer>().bounds.extents.x - choke / 2f;
             halfObjectHeight = lastObj.GetComponent<SpriteRenderer>().bounds.extents.y - choke / 2f;
 
-            
-            if (transform.position.x + screenBounds.x > lastObj.transform.position.x + halfObjectWidth)
+            if (transform.position.x + screenBounds.x > lastObj.transform.position.x + halfObjectWidth - buffer
+                && transform.position.x - screenBounds.x < lastObj.transform.position.x - halfObjectWidth + buffer)
+                return;
+
+            if (transform.position.x + screenBounds.x > firstObj.transform.position.x + halfObjectWidth - buffer
+                && transform.position.x - screenBounds.x < firstObj.transform.position.x - halfObjectWidth + buffer)
+                return;
+
+            if (transform.position.x + screenBounds.x > lastObj.transform.position.x + halfObjectWidth - buffer)
             {
-                firstObj.transform.SetAsLastSibling();
-                firstObj.transform.position = new Vector3(lastObj.transform.position.x + halfObjectWidth * 2, lastObj.transform.position.y, lastObj.transform.position.z);
-            }
-            else if (transform.position.x - screenBounds.x < firstObj.transform.position.x - halfObjectWidth)
-            {
+                for (int j = 0; j < objects.Length - 1; j++)
+                {
+                    objects[j].transform.position = new Vector3(
+                        lastObj.transform.position.x + halfObjectWidth * 2 * (j + 1),
+                        lastObj.transform.position.y,
+                        lastObj.transform.position.z);
+                }
                 lastObj.transform.SetAsFirstSibling();
-                lastObj.transform.position = new Vector3(firstObj.transform.position.x - halfObjectWidth * 2, firstObj.transform.position.y, firstObj.transform.position.z);
             }
+
+            else if (transform.position.x - screenBounds.x < firstObj.transform.position.x - halfObjectWidth + buffer)
+            {
+                for (int j = 1; j < objects.Length; j++)
+                {
+                    objects[j].transform.position = new Vector3(
+                        firstObj.transform.position.x - halfObjectWidth * 2 * (objects.Length - j),
+                        firstObj.transform.position.y,
+                        firstObj.transform.position.z);
+                }
+                firstObj.transform.SetAsLastSibling();
+            }
+
         }
 
         GameObject firstRow = rows[0];
         GameObject lastRow = rows[rows.Length - 1];
 
+        if (transform.position.y + screenBounds.y > lastRowChild.transform.position.y + halfObjectHeight - buffer
+            && transform.position.y - screenBounds.y < lastRowChild.transform.position.y - halfObjectHeight + buffer)
+            return;
+
+        if (transform.position.y + screenBounds.y > firstRowChild.transform.position.y + halfObjectHeight - buffer
+            && transform.position.y - screenBounds.y < firstRowChild.transform.position.y - halfObjectHeight + buffer)
+            return;
+
         if (transform.position.y + screenBounds.y > lastRowChild.transform.position.y + halfObjectHeight - buffer)
         {
-            lastRow.transform.SetAsFirstSibling();
             for (int i = 0; i < rows.Length - 1; i++)
             {
                 rows[i].transform.position = new Vector3(lastRow.transform.position.x,
                 lastRowChild.transform.position.y + halfObjectHeight * 2 * (i + 1),
                 lastRow.transform.position.z);
             }
+            lastRow.transform.SetAsFirstSibling();
         }
 
         else if (transform.position.y - screenBounds.y < firstRowChild.transform.position.y - halfObjectHeight + buffer)
         {
-            firstRow.transform.SetAsLastSibling();
             for (int i = 1; i < rows.Length; i++)
             {
                 rows[i].transform.position = new Vector3(firstRow.transform.position.x,
                 firstRowChild.transform.position.y - halfObjectHeight * 2 * (rows.Length - i),
                 firstRow.transform.position.z);
             }
+            firstRow.transform.SetAsLastSibling();
         }
 
 

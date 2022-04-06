@@ -31,7 +31,7 @@ namespace Scene2
             BodyHandler bodyH = body.GetComponent<BodyHandler>();
             float angle = sender.value;
             Quaternion target = Quaternion.Euler(0, 0, angle);
-            angleBodyT.text = string.Format("сцнк онкерю: {0:f0}", Mathf.Abs(angle));
+            angleBodyT.text = string.Format("сцнк онкерю: {0:f0}╟", Mathf.Abs(angle));
             bodyH.ImpulseDirRel = target * Vector2.right;
             body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
             forcesC.UpdateArrows();
@@ -41,7 +41,7 @@ namespace Scene2
         {
             float angle = -sender.value;
             Quaternion target = Quaternion.Euler(0, 0, angle);
-            anglePlaneT.text = string.Format("сцнк мюйкнмю окняйнярх: {0:f0}", Mathf.Abs(angle));
+            anglePlaneT.text = string.Format("сцнк мюйкнмю окняйнярх: {0:f0}╟", Mathf.Abs(angle));
             planeParent.transform.rotation = target;
             body.transform.rotation = target;
             body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;

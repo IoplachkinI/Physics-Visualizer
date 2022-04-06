@@ -15,7 +15,6 @@ namespace Scene2
         [SerializeField] private ArrowHandler v;
 
         private Rigidbody2D rb;
-        private Vector2 mg = Vector2.zero;
 
         public bool stopped { get; set; } = true;
 

@@ -8,7 +8,6 @@ public class ArrowHandler : MonoBehaviour
 
     [SerializeField] private GameObject head;
     [SerializeField] private GameObject text;
-    [SerializeField] private GameObject target;
 
     public float threshold = 0f;
     public float k = 0.1f;
@@ -18,7 +17,7 @@ public class ArrowHandler : MonoBehaviour
     public float textDistance = 1.5f;
 
     private bool isVisible = true;
-    public Vector2 vector = Vector2.zero;
+    private Vector2 vector = Vector2.zero;
 
     public bool IsVisible()
     {
