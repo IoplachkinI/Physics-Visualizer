@@ -7,11 +7,7 @@ namespace Scene4
     [RequireComponent(typeof(Rigidbody2D))]
     public class TopBodyHandler : MonoBehaviour
     {
-
-        private Rigidbody2D rb;
-
         public Vector2 startingPos;
-        private Vector2 lastPos;
 
         private Vector2 impulse; //WITHOUT CONSIDERATION FOR MASS (AS IF THE MASS IS 1kg)
         private bool inSimulation = false;
@@ -30,11 +26,6 @@ namespace Scene4
 
         [SerializeField] private TextMesh massT, velT;
 
-        public void OnEnable()
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-
         private void Update()
         {
             UpdateText();
@@ -42,38 +33,32 @@ namespace Scene4
 
         public void UpdateText()
         {
-            if (inSimulation) velT.text = string.Format("V={0:f1}Ï/Ò", rb.velocity.magnitude);
+            if (inSimulation) velT.text = string.Format("V={0:f1}Ï/Ò", GetComponent<Rigidbody2D>().velocity.magnitude);
             else velT.text = string.Format("V={0:f1}Ï/Ò", impulse.magnitude);
         }
 
 
         public void StopSimulation()
         {
-            if (rb == null)
-            {
-                lastPos = startingPos;
-                rb = GetComponent<Rigidbody2D>();
-            }
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
-            transform.position = lastPos;
+            transform.position = startingPos;
             inSimulation = false;
         }
 
         public void StartSimulation()
         {
-            if (rb == null) rb = GetComponent<Rigidbody2D>();
-            lastPos = rb.position;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = false;
             rb.AddForce(impulse * rb.mass, ForceMode2D.Impulse);
             inSimulation = true;
         }
 
-        public void SetMass(float mass)
+        public void SetMass(float value)
         {
-            rb.mass = mass;
-            if (mass < 1f) massT.text = string.Format("m={0:f2}Í„", mass);
-            else massT.text = string.Format("m={0:f0}Í„", mass);
+            GetComponent<Rigidbody2D>().mass = value;
+            massT.text = string.Format("m={0:f2}Í„", value);
         }
 
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SortingLayerController : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class SortingLayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        GetComponent<MeshRenderer>().sortingLayerID = SortingLayer.NameToID(sortingLayerName);
-        GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
+        if (TryGetComponent(out MeshRenderer mesh))
+        {
+            mesh.sortingLayerID = SortingLayer.NameToID(sortingLayerName);
+            mesh.sortingOrder = sortingOrder;
+        }
+
     }
 }

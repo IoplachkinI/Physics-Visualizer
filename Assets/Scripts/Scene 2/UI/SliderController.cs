@@ -12,7 +12,7 @@ namespace Scene2
         [SerializeField] private Text anglePlaneT, angleBodyT, heightT;
         [SerializeField] private GameObject body;
         [SerializeField] private GameObject planeParent;
-        [SerializeField] private Scene2.ForcesController forcesC;
+        [SerializeField] private ForcesController forcesC;
         [SerializeField] private TimeHandler timeH;
 
         public void DisableSliders()

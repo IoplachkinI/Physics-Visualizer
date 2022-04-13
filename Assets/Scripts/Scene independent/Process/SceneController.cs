@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    static string curSceneName;
     public void SwitchToName(string name)
     {
         StartCoroutine(LoadSceneAsync(name));
+        curSceneName = name;
     }
 
     private IEnumerator LoadSceneAsync(string name)
@@ -19,5 +21,14 @@ public class SceneController : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (curSceneName == "Menu") Application.Quit();
+            else StartCoroutine(LoadSceneAsync("Menu"));
+        }
     }
 }

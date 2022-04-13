@@ -19,6 +19,10 @@ public class ArrowHandler : MonoBehaviour
     private bool isVisible = true;
     private Vector2 vector = Vector2.zero;
 
+    private void OnEnable()
+    {
+    }
+
     public bool IsVisible()
     {
         return isVisible;
@@ -93,7 +97,7 @@ public class ArrowHandler : MonoBehaviour
         if (right == Vector3.right && head.transform.up != Vector3.up) right = -right;
 
         text.transform.localPosition = head.transform.localPosition + 
-            Quaternion.Euler(0, 0, textRotation) * (head.GetComponent<SpriteRenderer>().size.x * textDistance * right);
+            Quaternion.Euler(0, 0, textRotation) * new Vector2(head.GetComponent<SpriteRenderer>().size.x * textDistance, 0);
 
     }
 

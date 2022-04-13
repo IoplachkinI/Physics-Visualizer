@@ -59,6 +59,7 @@ public class TimeHandler : MonoBehaviour
     {
         Time.fixedDeltaTime = defFixedDelta * scale;
         timeScale = scale;
+        Time.timeScale = timeScale;
     }
 
 }

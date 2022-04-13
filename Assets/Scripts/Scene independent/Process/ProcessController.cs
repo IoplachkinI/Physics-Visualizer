@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class ProcessController : MonoBehaviour
 {
     public enum State {Running, Paused, Stopped};
-    [SerializeField] private GameObject body;
     private State state = State.Stopped;
     private bool menuOpened = false;
 
@@ -76,6 +75,11 @@ public class ProcessController : MonoBehaviour
                 }
         }
 
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        //if (!focus && state == State.Running) Pause.Invoke();
     }
 
 
