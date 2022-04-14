@@ -239,8 +239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20.8, y: -44.392}
-  m_SizeDelta: {x: 35.7164, y: 38.7848}
+  m_AnchoredPosition: {x: 0.000083923, y: -44.392}
+  m_SizeDelta: {x: 49.1195, y: 38.7848}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &44410151
 MonoBehaviour:
@@ -275,7 +275,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 5,5
 --- !u!222 &44410152
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_MinValue: 10
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 50
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1274,7 +1274,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151464154}
-  m_Text: "m=5,00\u043A\u0433"
+  m_Text: "m=1,00\u043A\u0433"
   m_OffsetZ: 0
   m_CharacterSize: 0.5
   m_LineSpacing: 1
@@ -3933,7 +3933,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.1x
+  m_Text: 0,1x
 --- !u!222 &519063511
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6378,7 +6378,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894331887}
-  m_Text: "M=5,00\u043A\u0433"
+  m_Text: "M=1,00\u043A\u0433"
   m_OffsetZ: 0
   m_CharacterSize: 0.5
   m_LineSpacing: 1
@@ -7948,7 +7948,7 @@ MonoBehaviour:
   m_MinValue: 10
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 50
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -9063,8 +9063,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.1, y: -44.392}
-  m_SizeDelta: {x: 35.7164, y: 38.7848}
+  m_AnchoredPosition: {x: 0.000042915, y: -44.392}
+  m_SizeDelta: {x: 52.4701, y: 38.7848}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466413239
 MonoBehaviour:
@@ -9099,7 +9099,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 5,5
 --- !u!222 &1466413240
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12574,7 +12574,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.5x
+  m_Text: 0,5x
 --- !u!222 &2033591687
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -122,7 +122,6 @@ namespace Scene4
                     topBody.Fr = bottomBody.ma / bottomBody.obj.GetComponent<Rigidbody2D>().mass * rb.mass;
                     unified = true;
                     rb.velocity = bottomBody.obj.GetComponent<Rigidbody2D>().velocity;
-                    Debug.Log("Detected");
                 }
 
                 bottomBody.ma += bottomBody.FrBody;

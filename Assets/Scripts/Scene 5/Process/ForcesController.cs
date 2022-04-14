@@ -111,7 +111,6 @@ namespace Scene5
 
             if (topBody.F.magnitude - topBody.N.magnitude * topBody.friction < _threshold)
             {
-                Debug.Log("detected");
                 topBody.F = m / (M + m) * topBody.obj.GetComponent<TopBodyHandler>().Force;
                 topBody.Fr = Vector2.zero;
             }

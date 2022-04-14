@@ -21,8 +21,7 @@ namespace Scene6
             {
                 mgArrow.SetVector(mg);
                 tArrow.SetVector(T);
-                if (stopped) vArrow.SetVector(obj.GetComponent<BodyHandler>().Impulse);
-                else vArrow.SetVector(obj.GetComponent<Rigidbody2D>().velocity);
+                vArrow.SetVector(obj.GetComponent<Rigidbody2D>().velocity);
                 maArrow.SetVector(ma);
             }
 
@@ -31,9 +30,9 @@ namespace Scene6
         public Body leftBody = new Body();
         public Body rightBody = new Body();
 
-        public static bool stopped { get; set; } = true;
         public float threshold = 0.05f;
         public float speedThreshold = 0.2f;
+        public float heightThreshold;
 
         public void UpdateAll()
         {
@@ -58,108 +57,65 @@ namespace Scene6
 
         public void UpdateForces()
         {
-
-            /*float _speedThreshold = speedThreshold * Time.timeScale;
             float m1 = leftBody.obj.GetComponent<Rigidbody2D>().mass;
             float m2 = rightBody.obj.GetComponent<Rigidbody2D>().mass;
+
+            float _heightThreshold = heightThreshold * (1f - rightBody.obj.GetComponent<Rigidbody2D>().velocity.magnitude / 30f);
+
+            float _threshold1 = m1 * threshold;
+            float _threshold2 = m2 * threshold;
+
             ProcessController pc = GetComponent<ProcessController>();
 
-            Rigidbody2D rb = topBody.obj.GetComponent<Rigidbody2D>();
-            float _threshold = m * threshold;
 
-            Vector2 relativeSpeedDir = (rb.velocity - bottomBody.obj.GetComponent<Rigidbody2D>().velocity).normalized;
-            Vector2 relativeSpeed = rb.velocity - bottomBody.obj.GetComponent<Rigidbody2D>().velocity;
+            if (leftBody.obj.transform.position.y > _heightThreshold ||
+                rightBody.obj.transform.position.y > _heightThreshold)
+                pc.PauseNoResume.Invoke();
 
-            topBody.mg = m * Physics.gravity;
-            topBody.N = -Vector3.Project(topBody.mg, topBody.obj.transform.up);
-            topBody.Fr = topBody.N.magnitude * topBody.friction
-                * -Vector3.Project(relativeSpeedDir, topBody.obj.transform.right);
-            topBody.F = topBody.obj.GetComponent<TopBodyHandler>().Force;
 
-            if (topBody.F.magnitude - topBody.N.magnitude * topBody.friction < _threshold)
+            leftBody.mg = m1 * Physics.gravity;
+            leftBody.T = -m2 * Physics.gravity;
+
+            leftBody.ma = leftBody.mg + leftBody.T;
+
+
+            rightBody.mg = m2 * Physics.gravity;
+            rightBody.T = -m1 * Physics.gravity;
+
+            rightBody.ma = rightBody.mg + rightBody.T;
+
+
+            if (leftBody.ma.magnitude > _threshold1)
             {
-                Debug.Log("detected");
-                topBody.F = m / (M + m) * topBody.obj.GetComponent<TopBodyHandler>().Force;
-                topBody.Fr = Vector2.zero;
+                leftBody.obj.GetComponent<Rigidbody2D>().AddForce(leftBody.ma);
             }
 
-            topBody.ma = topBody.mg + topBody.N + topBody.Fr + topBody.F;
-
-
-            rb = bottomBody.obj.GetComponent<Rigidbody2D>();
-            bottomBody.mg = M * Physics.gravity;
-            bottomBody.P = -topBody.N;
-            bottomBody.N = -Vector3.Project(bottomBody.mg + bottomBody.P, bottomBody.obj.transform.up);
-            bottomBody.FrPlane = bottomBody.N.magnitude * bottomBody.friction
-                * -Vector3.Project(rb.velocity.normalized, bottomBody.obj.transform.right);
-            bottomBody.FrBody = -topBody.Fr;
-            bottomBody.F = bottomBody.obj.GetComponent<BottomBodyHandler>().Force;
-
-            if (topBody.F.magnitude - topBody.N.magnitude * topBody.friction < _threshold)
+            if (rightBody.ma.magnitude > _threshold2)
             {
-                bottomBody.FrBody = M / (M + m) * topBody.obj.GetComponent<TopBodyHandler>().Force;
+                rightBody.obj.GetComponent<Rigidbody2D>().AddForce(rightBody.ma);
             }
 
-            else if ((bottomBody.F + bottomBody.FrBody).magnitude - bottomBody.N.magnitude * bottomBody.friction < _threshold && rb.velocity.magnitude < _speedThreshold)
-            {
-                bottomBody.FrPlane = -(bottomBody.F + bottomBody.FrBody);
-                rb.velocity = Vector2.zero;
-            }
 
-            bottomBody.ma = bottomBody.mg + bottomBody.P + bottomBody.N + bottomBody.FrPlane + bottomBody.FrBody + bottomBody.F;
+            if (leftBody.mg.magnitude < _threshold1) leftBody.mgArrow.Disable();
+            else leftBody.mgArrow.Enable();
 
-            _threshold = M * threshold;
-            if (bottomBody.ma.magnitude > _threshold)
-            {
-                bottomBody.obj.GetComponent<Rigidbody2D>().AddForce(bottomBody.ma);
-            }
+            if (leftBody.T.magnitude < _threshold1) leftBody.tArrow.Disable();
+            else leftBody.tArrow.Enable();
 
-            _threshold = m * threshold;
-            if (topBody.ma.magnitude > _threshold)
-            {
-                topBody.obj.GetComponent<Rigidbody2D>().AddForce(topBody.ma);
-            }
-
-            if (topBody.mg.magnitude < _threshold) topBody.mgArrow.Disable();
-            else topBody.mgArrow.Enable();
-
-            if (topBody.N.magnitude < _threshold) topBody.nArrow.Disable();
-            else topBody.nArrow.Enable();
-
-            if (topBody.Fr.magnitude < _threshold) topBody.frArrow.Disable();
-            else topBody.frArrow.Enable();
-
-            if (topBody.F.magnitude < _threshold) topBody.fArrow.Disable();
-            else topBody.fArrow.Enable();
-
-            if (topBody.ma.magnitude < _threshold) topBody.maArrow.Disable();
-            else topBody.maArrow.Enable();
+            if (leftBody.ma.magnitude < _threshold1) leftBody.maArrow.Disable();
+            else leftBody.maArrow.Enable();
 
 
-            _threshold = M * threshold;
-            if (bottomBody.mg.magnitude < _threshold) bottomBody.mgArrow.Disable();
-            else bottomBody.mgArrow.Enable();
 
-            if (bottomBody.N.magnitude < _threshold) bottomBody.nArrow.Disable();
-            else bottomBody.nArrow.Enable();
+            if (rightBody.mg.magnitude < _threshold2) rightBody.mgArrow.Disable();
+            else rightBody.mgArrow.Enable();
 
-            if (bottomBody.P.magnitude < _threshold) bottomBody.pArrow.Disable();
-            else bottomBody.pArrow.Enable();
+            if (rightBody.T.magnitude < _threshold2) rightBody.tArrow.Disable();
+            else rightBody.tArrow.Enable();
 
-            if (bottomBody.FrBody.magnitude < _threshold) bottomBody.frBodyArrow.Disable();
-            else bottomBody.frBodyArrow.Enable();
-
-            if (bottomBody.FrPlane.magnitude < _threshold) bottomBody.frPlaneArrow.Disable();
-            else bottomBody.frPlaneArrow.Enable();
-
-            if (bottomBody.F.magnitude < _threshold) bottomBody.fArrow.Disable();
-            else bottomBody.fArrow.Enable();
-
-            if (bottomBody.ma.magnitude < _threshold)
-                bottomBody.maArrow.Disable();
-            else bottomBody.maArrow.Enable();
-            */
-
+            if (rightBody.ma.magnitude < _threshold2) rightBody.maArrow.Disable();
+            else rightBody.maArrow.Enable();
+        
         }
 
         public void UpdateArrows()
@@ -170,6 +126,7 @@ namespace Scene6
 
         public void ResetVariables()
         {
+
         }
     }
 }

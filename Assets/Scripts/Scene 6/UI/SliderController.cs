@@ -8,12 +8,18 @@ namespace Scene6
     public class SliderController : MonoBehaviour
     {
         [SerializeField] private List<Slider> sliders;
-        [SerializeField] private Text fricBodyT, fricPlaneT;
-        [SerializeField] private GameObject topBody;
-        [SerializeField] private GameObject bottomBody;
+        [SerializeField] private GameObject leftBody;
+        [SerializeField] private GameObject rightBody;
         [SerializeField] private ForcesController forcesC;
         [SerializeField] private TimeHandler timeH;
 
+        public void OnEnable()
+        {
+            foreach (Slider slider in sliders)
+            {
+                slider.onValueChanged.Invoke(0);
+            }
+        }
         public void DisableSliders()
         {
             foreach (Slider slider in sliders) slider.interactable = false;
@@ -26,14 +32,14 @@ namespace Scene6
 
         public void SetMassLeft(Slider sender)
         {
-            topBody.GetComponent<BodyHandler>().SetMass(sender.value / 10f);
+            leftBody.GetComponent<BodyHandler>().SetMass(sender.value / 10f);
             forcesC.UpdateAll();
         }
 
         public void SetMassRight(Slider sender)
         {
 
-            bottomBody.GetComponent<BodyHandler>().SetMass(sender.value / 10f);
+            rightBody.GetComponent<BodyHandler>().SetMass(sender.value / 10f);
             forcesC.UpdateAll();
         }
 

@@ -1544,8 +1544,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20.8, y: -44.392}
-  m_SizeDelta: {x: 35.7164, y: 38.7848}
+  m_AnchoredPosition: {x: 0.000048816, y: -41.329}
+  m_SizeDelta: {x: 44.944, y: 38.7848}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320719194
 MonoBehaviour:
@@ -1580,7 +1580,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 5,5
 --- !u!222 &320719195
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3349,8 +3349,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -21.1, y: -44.392}
-  m_SizeDelta: {x: 35.7164, y: 38.7848}
+  m_AnchoredPosition: {x: -0.00011349, y: -41.329}
+  m_SizeDelta: {x: 44.944, y: 38.7848}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569241198
 MonoBehaviour:
@@ -3385,7 +3385,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 5,5
 --- !u!222 &569241199
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5334,7 +5334,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814122234}
-  m_Text: "M=5,00\u043A\u0433"
+  m_Text: "M=1,00\u043A\u0433"
   m_OffsetZ: 0
   m_CharacterSize: 0.5
   m_LineSpacing: 1
@@ -5688,7 +5688,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.5x
+  m_Text: 0,5x
 --- !u!222 &882637400
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6651,7 +6651,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0.1x
+  m_Text: 0,1x
 --- !u!222 &1008295472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11265,7 +11265,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812208509}
-  m_Text: "m=5,00\u043A\u0433"
+  m_Text: "m=1,00\u043A\u0433"
   m_OffsetZ: 0
   m_CharacterSize: 0.5
   m_LineSpacing: 1
@@ -11434,7 +11434,7 @@ MonoBehaviour:
   m_MinValue: 10
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 50
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -12386,7 +12386,7 @@ MonoBehaviour:
   m_MinValue: 10
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 50
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

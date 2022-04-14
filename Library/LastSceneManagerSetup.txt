@@ -1,13 +1,13 @@
 sceneSetups:
-- path: Assets/Scenes/Menu.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
-- path: Assets/Scenes/Scneario 5.unity
+- path: Assets/Scenes/Scenario 6.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0
-- path: Assets/Scenes/Scenario 2.unity
+- path: Assets/Scenes/Scenario 7.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Menu.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0
@@ -15,7 +15,19 @@ sceneSetups:
   isLoaded: 0
   isActive: 0
   isSubScene: 0
+- path: Assets/Scenes/Scenario 2.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
 - path: Assets/Scenes/Scenario 4.unity
   isLoaded: 0
   isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Scenario 5.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Scenario 8.unity
+  isLoaded: 1
+  isActive: 1
   isSubScene: 0

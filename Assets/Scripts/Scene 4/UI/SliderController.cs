@@ -14,6 +14,13 @@ namespace Scene4
         [SerializeField] private ForcesController forcesC;
         [SerializeField] private TimeHandler timeH;
 
+        public void OnEnable()
+        {
+            foreach (Slider slider in sliders)
+            {
+                slider.onValueChanged.Invoke(0);
+            }
+        }
         public void DisableSliders()
         {
             foreach (Slider slider in sliders) slider.interactable = false;
