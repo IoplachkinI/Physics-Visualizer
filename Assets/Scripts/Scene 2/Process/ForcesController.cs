@@ -14,22 +14,22 @@ namespace Scene2
         [SerializeField] private ArrowHandler vy;
         [SerializeField] private ArrowHandler v;
 
-        private Rigidbody2D rb;
-
         public bool stopped { get; set; } = true;
-
-        private void OnEnable()
-        {
-            rb = body.GetComponent<Rigidbody2D>();
-        }
 
         private void Update()
         {
             UpdateArrows();
         }
 
+        public void UpdateAll()
+        {
+            UpdateForces();
+            UpdateArrows();
+        }
+
         public void UpdateArrows()
         {
+            Rigidbody2D rb = body.GetComponent<Rigidbody2D>();
             if (stopped)
             {
                 BodyHandler bh = rb.GetComponent<BodyHandler>();
@@ -43,6 +43,11 @@ namespace Scene2
 
             vx.SetVector(new Vector2(v.GetVector().x, 0));
             vy.SetVector(new Vector2(0, v.GetVector().y));
+
+        }
+
+        public void UpdateForces()
+        {
 
         }
     }

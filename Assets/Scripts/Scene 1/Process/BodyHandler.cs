@@ -71,6 +71,7 @@ namespace Scene1
 
         public void SetMass(float mass)
         {
+            if(rb == null) rb = GetComponent<Rigidbody2D>();
             rb.mass = mass;
             if (mass < 1f) massT.text = string.Format("m={0:f2}êã", mass);
             else massT.text = string.Format("m={0:f0}êã", mass);

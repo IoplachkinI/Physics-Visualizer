@@ -16,7 +16,7 @@ public class TargetFollow : MonoBehaviour
     [SerializeField] private bool followZAxis = false;
 
 
-    void Update()
+    void LateUpdate()
     {
         Vector3 tp = target.transform.position;
         if (relativeOffset) tp += target.transform.right * xOffset + target.transform.up * yOffset;

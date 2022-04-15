@@ -9,7 +9,6 @@ public class RepeatingBackground : MonoBehaviour
     private Vector2 screenBounds;
     public float choke = 0f;
     public float scrollSpeed;
-    public float buffer = 1f;
 
     private void OnEnable()
     {
@@ -23,8 +22,8 @@ public class RepeatingBackground : MonoBehaviour
         obj.GetComponent<SpriteRenderer>().enabled = true;
         float objectWidth = obj.GetComponent<SpriteRenderer>().bounds.size.x - choke;
         float objectHeight = obj.GetComponent<SpriteRenderer>().bounds.size.y - choke;
-        int childrenNeededW = (int)Mathf.Ceil(screenBounds.x * 10 / objectWidth);
-        int childrenNeededH = (int)Mathf.Ceil(screenBounds.y * 10 / objectHeight);
+        int childrenNeededW = (int)Mathf.Ceil(screenBounds.x * 20 / objectWidth);
+        int childrenNeededH = (int)Mathf.Ceil(screenBounds.y * 20 / objectHeight);
 
         GameObject objCloneRow = new GameObject();
         objCloneRow.transform.position = obj.transform.position;
@@ -79,21 +78,21 @@ public class RepeatingBackground : MonoBehaviour
                 objects[j] = rows[i].transform.GetChild(j).gameObject;
             }
 
-            GameObject firstObj = objects[1];
-            GameObject lastObj = objects[objects.Length - 2];
+            GameObject firstObj = objects[2];
+            GameObject lastObj = objects[objects.Length - 3];
 
-            if (i == 1) firstRowChild = firstObj;
-            else if (i == rows.Length - 2) lastRowChild = firstObj;
+            if (i == 2) firstRowChild = firstObj;
+            else if (i == rows.Length - 3) lastRowChild = firstObj;
 
             halfObjectWidth = lastObj.GetComponent<SpriteRenderer>().bounds.extents.x - choke / 2f;
             halfObjectHeight = lastObj.GetComponent<SpriteRenderer>().bounds.extents.y - choke / 2f;
 
-            if (transform.position.x + screenBounds.x > lastObj.transform.position.x + halfObjectWidth - buffer)
+            if (transform.position.x + screenBounds.x > lastObj.transform.position.x + halfObjectWidth)
             {
-                for (int j = 0; j < objects.Length - 3; j++)
+                for (int j = 0; j < objects.Length - 5; j++)
                 {
                     objects[j].transform.position = new Vector3(
-                        lastObj.transform.position.x + halfObjectWidth * 2 * (j + 1) + halfObjectWidth * 2,
+                        lastObj.transform.position.x + halfObjectWidth * 2 * (j + 1) + halfObjectWidth * 4,
                         lastObj.transform.position.y,
                         lastObj.transform.position.z);
                 }
@@ -101,52 +100,60 @@ public class RepeatingBackground : MonoBehaviour
                 objects[objects.Length - 1].transform.SetAsFirstSibling();
                 objects[objects.Length - 2].transform.SetAsFirstSibling();
                 objects[objects.Length - 3].transform.SetAsFirstSibling();
+                objects[objects.Length - 4].transform.SetAsFirstSibling();
+                objects[objects.Length - 5].transform.SetAsFirstSibling();
             }
 
-            else if (transform.position.x - screenBounds.x < firstObj.transform.position.x - halfObjectWidth + buffer)
+            else if (transform.position.x - screenBounds.x < firstObj.transform.position.x - halfObjectWidth)
             {
-                for (int j = 3; j < objects.Length; j++)
+                for (int j = 5; j < objects.Length; j++)
                 {
                     objects[j].transform.position = new Vector3(
-                        firstObj.transform.position.x - halfObjectWidth * 2 * (objects.Length - j) - halfObjectWidth * 2,
+                        firstObj.transform.position.x - halfObjectWidth * 2 * (objects.Length - j) - halfObjectWidth * 4,
                         firstObj.transform.position.y,
                         firstObj.transform.position.z);
                 }
                 objects[0].transform.SetAsLastSibling();
                 objects[1].transform.SetAsLastSibling();
                 objects[2].transform.SetAsLastSibling();
+                objects[3].transform.SetAsLastSibling();
+                objects[4].transform.SetAsLastSibling();
             }
 
         }
 
-        GameObject firstRow = rows[1];
-        GameObject lastRow = rows[rows.Length - 2];
+        GameObject firstRow = rows[2];
+        GameObject lastRow = rows[rows.Length - 3];
 
-        if (transform.position.y + screenBounds.y > lastRowChild.transform.position.y + halfObjectHeight - buffer)
+        if (transform.position.y + screenBounds.y > lastRowChild.transform.position.y + halfObjectHeight)
         {
-            for (int i = 0; i < rows.Length - 3; i++)
+            for (int i = 0; i < rows.Length - 5; i++)
             {
                 rows[i].transform.position = new Vector3(lastRow.transform.position.x,
-                lastRowChild.transform.position.y + halfObjectHeight * 2 * (i + 1) + halfObjectHeight * 2,
+                lastRowChild.transform.position.y + halfObjectHeight * 2 * (i + 1) + halfObjectHeight * 4,
                 lastRow.transform.position.z);
             }
 
             rows[rows.Length - 1].transform.SetAsFirstSibling();
             rows[rows.Length - 2].transform.SetAsFirstSibling();
             rows[rows.Length - 3].transform.SetAsFirstSibling();
+            rows[rows.Length - 4].transform.SetAsFirstSibling();
+            rows[rows.Length - 5].transform.SetAsFirstSibling();
         }
 
-        else if (transform.position.y - screenBounds.y < firstRowChild.transform.position.y - halfObjectHeight + buffer)
+        else if (transform.position.y - screenBounds.y < firstRowChild.transform.position.y - halfObjectHeight)
         {
-            for (int i = 3; i < rows.Length; i++)
+            for (int i = 5; i < rows.Length; i++)
             {
                 rows[i].transform.position = new Vector3(firstRow.transform.position.x,
-                firstRowChild.transform.position.y - halfObjectHeight * 2 * (rows.Length - i) - halfObjectHeight * 2,
+                firstRowChild.transform.position.y - halfObjectHeight * 2 * (rows.Length - i) - halfObjectHeight * 4,
                 firstRow.transform.position.z);
             }
             rows[0].transform.SetAsLastSibling();
             rows[1].transform.SetAsLastSibling();
             rows[2].transform.SetAsLastSibling();
+            rows[3].transform.SetAsLastSibling();
+            rows[4].transform.SetAsLastSibling();
         }
 
 

@@ -1759,7 +1759,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375514959}
-  m_Text: Mg
+  m_Text: mg
   m_OffsetZ: 0
   m_CharacterSize: 0.2
   m_LineSpacing: 1
@@ -3142,9 +3142,9 @@ RectTransform:
   m_Father: {fileID: 566316122}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -670, y: -100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 290, y: -100}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &900452707
@@ -4191,9 +4191,9 @@ RectTransform:
   m_Father: {fileID: 566316122}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 670, y: -100}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -290, y: -100}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206496485
@@ -6487,7 +6487,6 @@ MonoBehaviour:
   - {fileID: 684391785}
   choke: 0
   scrollSpeed: 0
-  buffer: 10
 --- !u!20 &1907655560
 Camera:
   m_ObjectHideFlags: 0

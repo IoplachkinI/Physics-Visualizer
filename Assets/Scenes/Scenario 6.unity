@@ -842,7 +842,6 @@ MonoBehaviour:
   - {fileID: 1348127120}
   choke: 0
   scrollSpeed: 0
-  buffer: 10
 --- !u!20 &191577725
 Camera:
   m_ObjectHideFlags: 0
@@ -3238,7 +3237,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824771018}
-  m_Text: mg
+  m_Text: T
   m_OffsetZ: 0
   m_CharacterSize: 0.2
   m_LineSpacing: 1
@@ -4303,8 +4302,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041C\u0410\u0421\u0421\u0410 \u0411\u041B\u041E\u041A\u0410 (\u041B)
-    (\u043A\u0433)"
+  m_Text: "\u041C\u0410\u0421\u0421\u0410 \u0422\u0415\u041B\u0410 (\u041B) (\u043A\u0433)"
 --- !u!222 &1083284358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4368,7 +4366,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116198592}
-  m_Text: Mg
+  m_Text: T
   m_OffsetZ: 0
   m_CharacterSize: 0.2
   m_LineSpacing: 1
@@ -4536,9 +4534,9 @@ RectTransform:
   m_Father: {fileID: 1686967978}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 670, y: -100}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -290, y: -100}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1151057822
@@ -6257,9 +6255,9 @@ RectTransform:
   m_Father: {fileID: 1686967978}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -670, y: -100}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 290, y: -100}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355247100
@@ -7867,8 +7865,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041C\u0410\u0421\u0421\u0410 \u0411\u041B\u041E\u041A\u0410 (\u041F)
-    (\u043A\u0433)"
+  m_Text: "\u041C\u0410\u0421\u0421\u0410 \u0422\u0415\u041B\u0410 (\u041F) (\u043A\u0433)"
 --- !u!222 &1957687809
 CanvasRenderer:
   m_ObjectHideFlags: 0

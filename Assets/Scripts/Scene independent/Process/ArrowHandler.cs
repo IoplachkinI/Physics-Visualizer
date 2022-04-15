@@ -19,10 +19,6 @@ public class ArrowHandler : MonoBehaviour
     private bool isVisible = true;
     private Vector2 vector = Vector2.zero;
 
-    private void OnEnable()
-    {
-    }
-
     public bool IsVisible()
     {
         return isVisible;

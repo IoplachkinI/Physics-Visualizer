@@ -169,6 +169,13 @@
     <Compile Include="Assets\Scripts\Scene 10\Process\ForcesController.cs" />
     <Compile Include="Assets\Scripts\Scene 10\Process\BodyHandler.cs" />
     <Compile Include="Assets\Scripts\Scene 10\UI\SliderController.cs" />
+    <Compile Include="Assets\Scripts\Scene 11\Process\BodyHandler.cs" />
+    <Compile Include="Assets\Scripts\Scene 11\Process\ForcesController.cs" />
+    <Compile Include="Assets\Scripts\Scene 11\UI\SliderController.cs" />
+    <Compile Include="Assets\Scripts\Scene 7\UI\SliderController.cs" />
+    <Compile Include="Assets\Scripts\Scene 7\Process\BodyHandler.cs" />
+    <Compile Include="Assets\Scripts\Scene 7\Process\ObjectsHandler.cs" />
+    <Compile Include="Assets\Scripts\Scene 7\Process\ForcesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
