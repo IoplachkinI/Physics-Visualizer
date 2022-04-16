@@ -9,7 +9,7 @@ namespace Scene2
     public class SliderController : MonoBehaviour
     {
         [SerializeField] private List<Slider> sliders;
-        [SerializeField] private Text anglePlaneT, angleBodyT, heightT;
+        [SerializeField] private Text anglePlaneT, angleBodyT, distT;
         [SerializeField] private GameObject body;
         [SerializeField] private GameObject planeParent;
         [SerializeField] private ForcesController forcesC;
@@ -33,27 +33,25 @@ namespace Scene2
         }
 
 
-        public void SetBodyAngle(Slider sender)
+        public void SetImpulseAngle(Slider sender)
         {
-            BodyHandler bodyH = body.GetComponent<BodyHandler>();
+            BodyHandler bh = body.GetComponent<BodyHandler>();
             float angle = sender.value;
-            Quaternion target = Quaternion.Euler(0, 0, angle);
             angleBodyT.text = string.Format("”√ŒÀ œŒÀ≈“¿: {0:f0}∞", Mathf.Abs(angle));
-            bodyH.ImpulseDirRel = target * Vector2.right;
-            body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
-            forcesC.UpdateArrows();
+            bh.impulseDirRel = Quaternion.Euler(0, 0, angle) * Vector2.right;
+            bh.UpdateImpulse();
+            forcesC.UpdateAll();
         }
 
         public void SetPlaneAngle(Slider sender)
         {
             float angle = -sender.value;
-            Quaternion target = Quaternion.Euler(0, 0, angle);
+            BodyHandler bh = body.GetComponent<BodyHandler>();
             anglePlaneT.text = string.Format("”√ŒÀ Õ¿ ÀŒÕ¿ œÀŒ— Œ—“»: {0:f0}∞", Mathf.Abs(angle));
-            planeParent.transform.rotation = target;
-            body.transform.rotation = target;
-            body.GetComponent<BodyHandler>().ImpulseDir = Quaternion.FromToRotation(Vector2.right, body.transform.right) * body.GetComponent<BodyHandler>().ImpulseDirRel;
-            body.GetComponent<BodyHandler>().SetRotatedDefStartingPos(target);
-            forcesC.UpdateArrows();
+            planeParent.transform.rotation = Quaternion.Euler(0, 0, angle);
+            bh.UpdateStartingPos();
+            bh.UpdateImpulse();
+            forcesC.UpdateAll();
 
         }
 
@@ -64,13 +62,15 @@ namespace Scene2
             else if (val < 100f) val /= 100f;
 
             body.GetComponent<BodyHandler>().SetMass(val);
-            forcesC.UpdateArrows();
+            forcesC.UpdateAll();
         }
 
         public void SetImpulse(Slider sender)
         {
-            body.GetComponent<BodyHandler>().ImpulseMag = sender.value;
-            forcesC.UpdateArrows();
+            BodyHandler bh = body.GetComponent<BodyHandler>();
+            bh.impulseMag = sender.value;
+            bh.UpdateImpulse();
+            forcesC.UpdateAll();
         }
 
         public void SetTimeScale(Slider sender)
@@ -78,11 +78,11 @@ namespace Scene2
             timeH.SetTimeScale(sender.value / 10f);
         }
 
-        public void setHeight(Slider sender)
+        public void SetDistance(Slider sender)
         {
-            body.GetComponent<BodyHandler>().StartingPos = body.GetComponent<BodyHandler>().GetRotatedDefStartingPos() + new Vector2(0, sender.value / 100f);
-            heightT.text = string.Format("Õ¿◊¿À‹Õ¿ﬂ \n¬€—Œ“¿: {0:f2} Ï", sender.value / 100f);
-            forcesC.UpdateArrows();
+            body.GetComponent<BodyHandler>().SetDistance(sender.value / 100f);
+            distT.text = string.Format("–¿——“ŒﬂÕ»≈ Œ“ “≈À¿ ƒŒ œÀŒ— Œ—“»: {0:f1} Ï", sender.value / 100f);
+            forcesC.UpdateAll();
         }
     }
 }

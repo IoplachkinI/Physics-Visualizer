@@ -1385,8 +1385,8 @@ GameObject:
   m_Component:
   - component: {fileID: 354462112}
   - component: {fileID: 354462113}
-  - component: {fileID: 354462115}
   - component: {fileID: 354462114}
+  - component: {fileID: 354462115}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1475,7 +1475,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: b016458aa58ffcc458349ff38a8687fb, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1489,8 +1489,8 @@ BoxCollider2D:
   m_GameObject: {fileID: 354462111}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: b016458aa58ffcc458349ff38a8687fb, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -2132,7 +2132,6 @@ MonoBehaviour:
   - {fileID: 742480598}
   choke: 0
   scrollSpeed: 0
-  buffer: 1
 --- !u!1 &520340629
 GameObject:
   m_ObjectHideFlags: 0
@@ -4889,7 +4888,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: b016458aa58ffcc458349ff38a8687fb, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -4932,7 +4931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cc0a01f11e77f4281e9d56f25b97fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPos: {x: 0, y: 0}
+  planeHeight: 11.83207
+  bodyHeight: 2.3238037
+  plane: {fileID: 354462111}
   massT: {fileID: 536951792}
   velT: {fileID: 1200345029}
 --- !u!1 &1188928900
@@ -5129,11 +5130,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1172071818}
+  plane: {fileID: 354462111}
   mgArrow: {fileID: 1377717862}
   nArrow: {fileID: 1012624102}
   frArrow: {fileID: 967933317}
   vArrow: {fileID: 294493196}
   maArrow: {fileID: 1799480258}
+  mg: {x: 0, y: 0}
+  N: {x: 0, y: 0}
+  Fr: {x: 0, y: 0}
+  ma: {x: 0, y: 0}
   friction: 0
   threshold: 0.1
 --- !u!114 &1195811161

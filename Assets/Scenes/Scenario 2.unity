@@ -614,11 +614,11 @@ MonoBehaviour:
   - {fileID: 1947785375}
   - {fileID: 565856031}
   - {fileID: 1453755192}
-  - {fileID: 168075282}
   - {fileID: 1658672569}
+  - {fileID: 168075282}
   anglePlaneT: {fileID: 817235717}
   angleBodyT: {fileID: 789681371}
-  heightT: {fileID: 1472376914}
+  distT: {fileID: 1472376914}
   body: {fileID: 1721348860}
   planeParent: {fileID: 1958062134}
   forcesC: {fileID: 1777137326}
@@ -818,8 +818,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 400, y: 39.3093}
+  m_AnchoredPosition: {x: 0.000049591, y: 49.326}
+  m_SizeDelta: {x: 432.9, y: 39.3093}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &254718725
 MonoBehaviour:
@@ -854,7 +854,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041D\u0410\u0427\u0410\u041B\u042C\u041D\u0410\u042F \u0412\u042B\u0421\u041E\u0422\u0410
+  m_Text: "\u041D\u0410\u0427\u0410\u041B\u042C\u041D\u041E\u0415 \u0420\u0410\u0421\u0421\u0422\u041E\u042F\u041D\u0418\u0415
     (\u043C)"
 --- !u!222 &254718726
 CanvasRenderer:
@@ -4418,8 +4418,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1254105228}
   - component: {fileID: 1254105231}
-  - component: {fileID: 1254105230}
-  - component: {fileID: 1254105229}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -4441,46 +4439,6 @@ Transform:
   m_Father: {fileID: 1958062135}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1254105229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254105227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c60986b3f6b8d0c4bb29815b74d2ac30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tag: MovingObject
-  pc: {fileID: 1777137323}
---- !u!61 &1254105230
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254105227}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: b016458aa58ffcc458349ff38a8687fb, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.011553764}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 19.161562, y: 10.823179}
-  m_EdgeRadius: 0
 --- !u!212 &1254105231
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4653,7 +4611,6 @@ MonoBehaviour:
   - {fileID: 283222860}
   choke: 0
   scrollSpeed: 0
-  buffer: 1
 --- !u!1 &1288925943
 GameObject:
   m_ObjectHideFlags: 0
@@ -5288,7 +5245,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445121182}
-  - component: {fileID: 1445121181}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -5296,19 +5252,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1445121181
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445121180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 57.7, y: 12.93, z: 1}
-  m_Center: {x: 0, y: -11.67, z: 0}
 --- !u!4 &1445121182
 Transform:
   m_ObjectHideFlags: 0
@@ -5517,7 +5460,7 @@ GameObject:
   - component: {fileID: 1472376915}
   - component: {fileID: 1472376914}
   m_Layer: 5
-  m_Name: Height (Text)
+  m_Name: Distance (Text)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5575,7 +5518,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041D\u0410\u0427\u0410\u041B\u042C\u041D\u0410\u042F \n\u0412\u042B\u0421\u041E\u0422\u0410:
+  m_Text: "\u0420\u0410\u0421\u0421\u0422\u041E\u042F\u041D\u0418\u0415 \u041E\u0422
+    \u0422\u0415\u041B\u0410 \u0414\u041E \u041F\u041B\u041E\u0421\u041A\u041E\u0421\u0422\u0418:
     0,0 \u043C"
 --- !u!222 &1472376915
 CanvasRenderer:
@@ -5912,7 +5856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1496477516}
   m_Layer: 5
-  m_Name: Height
+  m_Name: Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6496,7 +6440,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 196961330}
         m_TargetAssemblyTypeName: Scene2.SliderController, Assembly-CSharp
-        m_MethodName: setHeight
+        m_MethodName: SetDistance
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1658672569}
@@ -6849,7 +6793,7 @@ GameObject:
   - component: {fileID: 1721348861}
   m_Layer: 0
   m_Name: Body
-  m_TagString: MovingObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6870,10 +6814,12 @@ MonoBehaviour:
   velT: {fileID: 1490484518}
   vxT: {fileID: 2090554882}
   vyT: {fileID: 1572164256}
-  defStartingPos: {x: 0, y: -2.54394}
   plane: {fileID: 1254105227}
-  pc: {fileID: 1777137323}
-  startingPos: {x: 0, y: 0}
+  planeHeight: 11.8
+  bodyHeight: 1.1
+  impulseMag: 0
+  impulseDirRel: {x: 1, y: 0}
+  impulse: {x: 0, y: 0}
 --- !u!4 &1721348862
 Transform:
   m_ObjectHideFlags: 0
@@ -6899,7 +6845,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: b016458aa58ffcc458349ff38a8687fb, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.019824505, y: -0.00025320053}
@@ -6930,7 +6876,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: b016458aa58ffcc458349ff38a8687fb, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -7292,7 +7238,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1254105229}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CollisionHandler, Assembly-CSharp
         m_MethodName: set_tookOff
         m_Mode: 6
@@ -7615,10 +7561,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1721348860}
+  plane: {fileID: 1254105227}
   pc: {fileID: 1777137323}
   vx: {fileID: 643294721}
   vy: {fileID: 815521592}
   v: {fileID: 2083227723}
+  debug: 
 --- !u!1 &1801044971
 GameObject:
   m_ObjectHideFlags: 0
@@ -8083,7 +8031,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 196961330}
         m_TargetAssemblyTypeName: Scene2.SliderController, Assembly-CSharp
-        m_MethodName: SetBodyAngle
+        m_MethodName: SetImpulseAngle
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1947785375}

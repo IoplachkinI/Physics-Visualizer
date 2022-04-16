@@ -8,14 +8,13 @@ namespace Scene1
     public class ForcesController : MonoBehaviour
     {
         [SerializeField] private GameObject body;
-        [SerializeField] private ArrowHandler mgArrow;
-        [SerializeField] private ArrowHandler nArrow;
-        [SerializeField] private ArrowHandler frArrow;
-        [SerializeField] private ArrowHandler vArrow;
-        [SerializeField] private ArrowHandler maArrow;
-        private Vector2 mg = Vector2.zero;
-        private Vector2 N = Vector2.zero;
-        private Vector2 Fr = Vector2.zero;
+        [SerializeField] private GameObject plane;
+        [SerializeField] private ArrowHandler mgArrow, nArrow, frArrow, vArrow, maArrow;
+        public Vector2 mg = Vector2.zero;
+        public Vector2 N = Vector2.zero;
+        public Vector2 Fr = Vector2.zero;
+        public Vector2 ma = Vector2.zero;
+
 
         public bool stopped { get; set; } = true;
         public float friction = 0f;
@@ -46,7 +45,9 @@ namespace Scene1
         {
             Rigidbody2D rb = body.GetComponent<Rigidbody2D>();
             float _threshold = threshold * rb.mass;
-            mg = Vector2.down * Mathf.Abs(rb.mass * Physics.gravity.y);
+            float bodyHeight = body.GetComponent<BodyHandler>().bodyHeight;
+            float planeHeight = body.GetComponent<BodyHandler>().planeHeight;
+            mg = rb.mass * Physics.gravity;
             N = -Vector3.Project(mg, body.transform.up);
             Fr = N.magnitude * friction * -Vector3.Project(rb.velocity.normalized, body.transform.right);
 
@@ -65,6 +66,13 @@ namespace Scene1
 
             }
 
+            body.transform.position = plane.transform.parent.up * (planeHeight / 2f + bodyHeight / 2f) + plane.transform.position
+                   + Vector3.Project(body.transform.position - plane.transform.position, plane.transform.parent.right);
+
+            ma = Fr + (Vector2)Vector3.Project(mg, body.transform.right);
+
+            rb.velocity = Vector3.Project(rb.velocity, body.transform.right);
+
             if (mg.magnitude < _threshold) mgArrow.Disable();
             else mgArrow.Enable();
 
@@ -74,16 +82,16 @@ namespace Scene1
             if (Fr.magnitude < _threshold) frArrow.Disable();
             else frArrow.Enable();
 
-            if ((mg + N + Fr).magnitude < _threshold) maArrow.Disable();
+            if (ma.magnitude < _threshold) maArrow.Disable();
             else maArrow.Enable();
 
-            if ((mg + N + Fr).magnitude < _threshold) return;
-            rb.AddForce(mg + N + Fr);
+            if (ma.magnitude < _threshold) return;
+            rb.AddForce(ma);
         }
 
         public void UpdateArrows()
         {
-            maArrow.SetVector(mg + N + Fr);
+            maArrow.SetVector(ma);
             mgArrow.SetVector(mg);
             nArrow.SetVector(N);
             frArrow.SetVector(Fr);

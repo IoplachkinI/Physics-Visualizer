@@ -7,11 +7,10 @@ namespace Scene1
     [RequireComponent(typeof(Rigidbody2D))]
     public class BodyHandler : MonoBehaviour
     {
+        public float planeHeight;
+        public float bodyHeight;
 
-        private Rigidbody2D rb;
-
-        public Vector2 startingPos;
-        private Vector2 lastPos;
+        [SerializeField] private GameObject plane;
 
         private Vector2 impulse; //WITHOUT CONSIDERATION FOR MASS (AS IF THE MASS IS 1kg)
         private bool inSimulation = false;
@@ -30,11 +29,6 @@ namespace Scene1
 
         [SerializeField] private TextMesh massT, velT;
 
-        public void OnEnable()
-        {
-            rb = GetComponent<Rigidbody2D>();
-        }
-
         private void Update()
         {
             UpdateText();
@@ -42,6 +36,7 @@ namespace Scene1
 
         public void UpdateText()
         {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             if (inSimulation) velT.text = string.Format("V={0:f1}ì/ñ", rb.velocity.magnitude);
             else velT.text = string.Format("V={0:f1}ì/ñ", impulse.magnitude);
         }
@@ -49,21 +44,16 @@ namespace Scene1
 
         public void StopSimulation()
         {
-            if (rb == null)
-            {
-                lastPos = startingPos;
-                rb = GetComponent<Rigidbody2D>();
-            }
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = true;
             rb.velocity = Vector3.zero;
-            transform.position = lastPos;
+            transform.position = plane.transform.position + plane.transform.parent.up * (planeHeight / 2f + bodyHeight / 2f);
             inSimulation = false;
         }
 
         public void StartSimulation()
         {
-            if (rb == null) rb = GetComponent<Rigidbody2D>();
-            lastPos = rb.position;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = false;
             rb.AddForce(impulse * rb.mass, ForceMode2D.Impulse);
             inSimulation = true;
@@ -71,7 +61,7 @@ namespace Scene1
 
         public void SetMass(float mass)
         {
-            if(rb == null) rb = GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.mass = mass;
             if (mass < 1f) massT.text = string.Format("m={0:f2}êã", mass);
             else massT.text = string.Format("m={0:f0}êã", mass);

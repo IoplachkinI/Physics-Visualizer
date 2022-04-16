@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class CollisionHandler : MonoBehaviour
+namespace Scene2
 {
-    public bool tookOff { get; set; } = false;
-    public string _tag;
-    [SerializeField] private ProcessController pc;
-
-    private void OnCollisionExit2D(Collision2D collision)
+    [RequireComponent(typeof(BoxCollider2D))]
+    public class CollisionHandler : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag(_tag))
+        public bool tookOff { get; set; } = false;
+        public string _tag;
+        [SerializeField] private ProcessController pc;
+
+        private void OnCollisionExit2D(Collision2D collision)
         {
-            tookOff = true;
+            if (collision.gameObject.CompareTag(_tag))
+            {
+                tookOff = true;
+            }
         }
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (tookOff && collision.gameObject.CompareTag(_tag))
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            pc.PauseNoResume.Invoke();
+            if (tookOff && collision.gameObject.CompareTag(_tag))
+            {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                pc.PauseNoResume.Invoke();
+            }
         }
     }
 }
